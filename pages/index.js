@@ -9,7 +9,7 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #2d3748; background-color: #f7fafc; margin: 0; padding: 20px; }
         .email-card { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
         .header-logo { text-align: center; padding: 30px 20px 15px; }
-        .logo-circle { width: 70px; height: 70px; margin: 0 auto 12px; border-radius: 50%; background: #ffffff; border: 1px solid #e2e8f0; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .logo-circle { margin: 0 auto 10px; display: inline-block; }
         .brand-title { font-size: 20px; font-weight: 700; color: #1a202c; margin: 0; letter-spacing: -0.2px; }
         .brand-sub { font-size: 12px; color: #64748b; margin: 3px 0 10px; }
         .blue-divider { width: 40px; height: 3px; background-color: #2563eb; margin: 0 auto; border-radius: 2px; }
@@ -44,12 +44,7 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
         <!-- Logo & Header -->
         <div class="header-logo">
             <div class="logo-circle">
-                <svg width="42" height="42" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="46" stroke="#2563eb" stroke-width="4" fill="#ffffff"/>
-                    <path d="M50 20 L75 35 L75 65 L50 80 L25 65 L25 35 Z" stroke="#1e3a8a" stroke-width="4" fill="none"/>
-                    <path d="M35 45 L50 35 L65 45 L50 55 Z" fill="#2563eb"/>
-                    <text x="50" y="72" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#1e3a8a" text-anchor="middle">SSSAM</text>
-                </svg>
+                <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto;" />
             </div>
             <div class="brand-title">SSSAM Academy</div>
             <div class="brand-sub">Smart Solutions School of AI & Machine Learning</div>
@@ -117,7 +112,7 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
                 
                 <div class="contact-info">
                     <strong>Phone:</strong> 9102130958<br>
-                    <strong>Email:</strong> <a href="mailto:hr.sssamacademy@gmail.com">hr.sssamacademy@gmail.com</a><br>
+                    <strong>Email:</strong> <a href="mailto:placements@sssamacademy.com">placements@sssamacademy.com</a><br>
                     <strong>Website:</strong> <a href="http://www.sssamacademy.com" target="_blank">www.sssamacademy.com</a>
                 </div>
             </div>
@@ -134,7 +129,7 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
 export default function Dashboard() {
   const [apiKey, setApiKey] = useState('');
   const [senderName, setSenderName] = useState('SSSAM Academy');
-  const [senderEmail, setSenderEmail] = useState('hr.sssamacademy@gmail.com');
+  const [senderEmail, setSenderEmail] = useState('placements@sssamacademy.com');
   const [subject, setSubject] = useState('Proposal: College Technical Workshops & Career Seminars - SSSAM Academy');
   const [htmlContent, setHtmlContent] = useState(OFFICIAL_SSSAM_TEMPLATE);
 
@@ -455,7 +450,7 @@ export default function Dashboard() {
               <label>Sender Email (Must be verified in Brevo)</label>
               <input
                 type="email"
-                placeholder="hr.sssamacademy@gmail.com"
+                placeholder="placements@sssamacademy.com"
                 value={senderEmail}
                 onChange={(e) => setSenderEmail(e.target.value)}
               />
