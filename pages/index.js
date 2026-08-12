@@ -95,7 +95,7 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
 </body>
 </html>`;
 
-// Template 2: 🏢 Corporate HR Talent Hiring Pitch (Company Outreach)
+// Template 2: 🏢 Corporate HR Talent Hiring Pitch (Company Outreach) - Supports Dynamic Role Injector!
 const CORPORATE_HIRING_TEMPLATE = `<!DOCTYPE html>
 <html>
 <head>
@@ -132,14 +132,7 @@ const CORPORATE_HIRING_TEMPLATE = `<!DOCTYPE html>
             <p style="margin-bottom: 14px;">SSSAM Academy is a specialized IT training institute focused on upskilling engineering and technology graduates into <strong>job-ready software & tech professionals</strong>.</p>
 
             <div class="callout-box">
-                <div style="font-weight: 700; color: #1e3a8a; font-size: 15px;">Trained IT Talent Domains Available for Hiring</div>
-                <div style="font-size: 13px; color: #1e40af; margin-top: 6px; line-height: 1.7;">
-                    • <strong>Full Stack & MERN Web Developers</strong><br>
-                    • <strong>Data Analysts, Data Science & AI/ML Engineers</strong><br>
-                    • <strong>Cybersecurity & Ethical Hacking Specialists</strong><br>
-                    • <strong>Digital Marketing & SEO Managers</strong><br>
-                    • <strong>CCNA/CCNP, Cloud (AWS) & DevOps Engineers</strong>
-                </div>
+                {RoleCalloutContent}
             </div>
 
             <p style="margin-bottom: 14px;">We provide <strong>pre-evaluated, project-trained candidates</strong> ready for immediate onboarding with <strong>zero recruitment fees</strong> for partner companies.</p>
@@ -293,12 +286,26 @@ const TEMPLATES_LIST = [
   }
 ];
 
+const PRESET_ROLES = [
+  { id: 'all', label: '🌟 All Tech Profiles (Multi-Domain Hiring)', title: 'All IT & Tech Profiles' },
+  { id: 'fullstack', label: '💻 Full Stack & MERN Web Developers', title: 'Full Stack & MERN Web Developers' },
+  { id: 'datascience', label: '📊 Data Analytics, Data Science & AI/ML Engineers', title: 'Data Analytics, Data Science & AI/ML Engineers' },
+  { id: 'cybersecurity', label: '🛡️ Cybersecurity & Ethical Hacking Specialists', title: 'Cybersecurity & Ethical Hacking Specialists' },
+  { id: 'digitalmarketing', label: '📈 Digital Marketing & SEO Managers', title: 'Digital Marketing & SEO Managers' },
+  { id: 'clouddevops', label: '☁️ CCNA/CCNP, AWS Cloud & DevOps Engineers', title: 'AWS Cloud & DevOps Engineers' },
+  { id: 'custom', label: '✏️ Custom Role (Type your own role...)', title: 'Custom Role' }
+];
+
 export default function Dashboard() {
   const [selectedTemplateId, setSelectedTemplateId] = useState('official_sssam');
   const [subject, setSubject] = useState(TEMPLATES_LIST[0].subject);
   const [senderEmail, setSenderEmail] = useState('placements@sssamacademy.com');
   const [htmlContent, setHtmlContent] = useState(OFFICIAL_SSSAM_TEMPLATE);
   const [showPreview, setShowPreview] = useState(false);
+
+  // Dynamic Job Role Customizer State (for Corporate Outreach)
+  const [selectedRole, setSelectedRole] = useState('all');
+  const [customRoleInput, setCustomRoleInput] = useState('');
 
   // Dual Recipient Mode: 'single' vs 'csv'
   const [inputMode, setInputMode] = useState('single');
@@ -323,6 +330,27 @@ export default function Dashboard() {
       .catch((err) => console.log('Env config load note:', err));
   }, []);
 
+  // Compute Active Job Role Title
+  const getActiveRoleTitle = () => {
+    if (selectedRole === 'custom') {
+      return customRoleInput.trim() || 'Software & Tech Professionals';
+    }
+    const found = PRESET_ROLES.find((r) => r.id === selectedRole);
+    return found ? found.title : 'IT & Tech Professionals';
+  };
+
+  // Update Subject and HTML when Template or Role changes
+  useEffect(() => {
+    if (selectedTemplateId === 'corporate_hiring') {
+      const roleTitle = getActiveRoleTitle();
+      if (selectedRole === 'all') {
+        setSubject('Proposal: IT Talent Sourcing & Campus Recruitment Partnership - SSSAM Academy');
+      } else {
+        setSubject(`Hiring Proposal: Job-Ready ${roleTitle} - SSSAM Academy`);
+      }
+    }
+  }, [selectedRole, customRoleInput, selectedTemplateId]);
+
   // Handle Template Selection
   const handleTemplateChange = (templateId) => {
     setSelectedTemplateId(templateId);
@@ -331,6 +359,8 @@ export default function Dashboard() {
       setHtmlContent(selected.html);
       setSubject(selected.subject);
       setSenderEmail(selected.defaultSender);
+      setSelectedRole('all');
+      setCustomRoleInput('');
       addLog(`Template selected: ${selected.name}`, 'green');
     }
   };
@@ -458,10 +488,37 @@ export default function Dashboard() {
     return `Dear ${cleanName},`;
   };
 
-  // Render Template with Smart Salutation
+  // Generate Dynamic Callout Box Content for Corporate HR Template
+  const getRoleCalloutHTML = () => {
+    const roleTitle = getActiveRoleTitle();
+
+    if (selectedRole === 'all') {
+      return `<div style="font-weight: 700; color: #1e3a8a; font-size: 15px;">Trained IT Talent Domains Available for Hiring</div>
+              <div style="font-size: 13px; color: #1e40af; margin-top: 6px; line-height: 1.7;">
+                  • <strong>Full Stack & MERN Web Developers</strong><br>
+                  • <strong>Data Analysts, Data Science & AI/ML Engineers</strong><br>
+                  • <strong>Cybersecurity & Ethical Hacking Specialists</strong><br>
+                  • <strong>Digital Marketing & SEO Managers</strong><br>
+                  • <strong>CCNA/CCNP, Cloud (AWS) & DevOps Engineers</strong>
+              </div>`;
+    }
+
+    return `<div style="font-weight: 700; color: #1e3a8a; font-size: 15px;">⭐ Ready Candidate Pool: ${roleTitle}</div>
+            <div style="font-size: 13px; color: #1e40af; margin-top: 6px; line-height: 1.7;">
+                We have pre-evaluated, project-trained candidates specifically skilled in <strong>${roleTitle}</strong> ready for immediate onboarding with zero recruitment fees for partner companies.
+            </div>`;
+  };
+
+  // Render Template with Smart Salutation & Dynamic Role Injection
   const renderTemplateForRecipient = (rec) => {
     const salutation = getSmartSalutation(rec?.name);
-    return htmlContent.replace(/{Salutation}/g, salutation);
+    let html = htmlContent.replace(/{Salutation}/g, salutation);
+
+    if (selectedTemplateId === 'corporate_hiring') {
+      html = html.replace(/{RoleCalloutContent}/g, getRoleCalloutHTML());
+    }
+
+    return html;
   };
 
   // Live Iframe Renderer (if preview toggled)
@@ -474,7 +531,7 @@ export default function Dashboard() {
         doc.close();
       }
     }
-  }, [htmlContent, recipients, showPreview, selectedTemplateId]);
+  }, [htmlContent, recipients, showPreview, selectedTemplateId, selectedRole, customRoleInput]);
 
   // Send Email Helper Function
   const sendSingleEmail = async (rec) => {
@@ -706,6 +763,48 @@ export default function Dashboard() {
                 ))}
               </select>
             </div>
+
+            {/* DYNAMIC JOB ROLE CUSTOMIZER (Visible only when Corporate HR Hiring template is chosen) */}
+            {selectedTemplateId === 'corporate_hiring' && (
+              <div style={{ background: 'rgba(37, 99, 235, 0.12)', padding: '12px', borderRadius: '8px', border: '1px solid rgba(37, 99, 235, 0.3)', marginBottom: '14px' }}>
+                <div className="form-group" style={{ marginBottom: '8px' }}>
+                  <label style={{ color: '#93c5fd', fontWeight: '700' }}>🎯 Target Candidate Role / Profile</label>
+                  <select
+                    value={selectedRole}
+                    onChange={(e) => setSelectedRole(e.target.value)}
+                    style={{
+                      width: '100%',
+                      padding: '8px 10px',
+                      background: 'rgba(15, 23, 42, 0.95)',
+                      border: '1px solid #3b82f6',
+                      borderRadius: '6px',
+                      color: '#fff',
+                      fontSize: '12px',
+                      fontWeight: '600'
+                    }}
+                  >
+                    {PRESET_ROLES.map((r) => (
+                      <option key={r.id} value={r.id}>
+                        {r.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {selectedRole === 'custom' && (
+                  <div className="form-group" style={{ marginBottom: 0 }}>
+                    <label style={{ fontSize: '11px', color: '#cbd5e1' }}>Type Custom Job Role / Profile Name *</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Java Developers / React Native Interns"
+                      value={customRoleInput}
+                      onChange={(e) => setCustomRoleInput(e.target.value)}
+                      style={{ padding: '8px 10px', fontSize: '12px' }}
+                    />
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Recipient Input Mode Toggle */}
             <div style={{ display: 'flex', gap: '6px', margin: '14px 0 10px' }}>
