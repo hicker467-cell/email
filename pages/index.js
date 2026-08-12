@@ -39,12 +39,7 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
     <div class="email-card">
         <div class="header-logo">
             <div class="logo-circle">
-                <div style="margin: 0 auto 12px; text-align: center;">
-        <img src="https://raw.githubusercontent.com/hicker467-cell/email/main/public/logo.png" alt="SSSAM ACADEMY" style="max-width: 160px; height: auto; display: block; margin: 0 auto; border: 0;" onerror="this.style.display='none';" />
-        <div style="display: inline-block; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: #ffffff; padding: 10px 22px; border-radius: 30px; font-weight: 800; font-size: 17px; letter-spacing: 0.8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; box-shadow: 0 4px 12px rgba(37,99,235,0.25);">
-            🎓 SSSAM ACADEMY
-        </div>
-    </div>
+                <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto;" />
             </div>
             <div class="brand-title">SSSAM Academy</div>
             <div class="brand-sub">Smart Solutions School of AI & Machine Learning</div>
@@ -100,7 +95,7 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
 </body>
 </html>`;
 
-// Template 2: 🏢 Corporate HR Talent Hiring Pitch (Company Outreach) - Supports Dynamic Role Injector!
+// Template 2: 🏢 Corporate HR Talent Hiring Pitch (Company Outreach)
 const CORPORATE_HIRING_TEMPLATE = `<!DOCTYPE html>
 <html>
 <head>
@@ -110,6 +105,7 @@ const CORPORATE_HIRING_TEMPLATE = `<!DOCTYPE html>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #2d3748; background-color: #f7fafc; margin: 0; padding: 20px; }
         .email-card { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
         .header-logo { text-align: center; padding: 30px 20px 15px; }
+        .logo-circle { margin: 0 auto 10px; display: inline-block; }
         .brand-title { font-size: 20px; font-weight: 700; color: #1a202c; margin: 0; }
         .brand-sub { font-size: 12px; color: #2563eb; font-weight: 600; margin: 3px 0 10px; }
         .blue-divider { width: 40px; height: 3px; background-color: #2563eb; margin: 0 auto; border-radius: 2px; }
@@ -125,12 +121,9 @@ const CORPORATE_HIRING_TEMPLATE = `<!DOCTYPE html>
 <body>
     <div class="email-card">
         <div class="header-logo">
-            <div style="margin: 0 auto 12px; text-align: center;">
-        <img src="https://raw.githubusercontent.com/hicker467-cell/email/main/public/logo.png" alt="SSSAM ACADEMY" style="max-width: 160px; height: auto; display: block; margin: 0 auto; border: 0;" onerror="this.style.display='none';" />
-        <div style="display: inline-block; background: linear-gradient(135deg, #1e293b 0%, #2563eb 100%); color: #ffffff; padding: 10px 22px; border-radius: 30px; font-weight: 800; font-size: 17px; letter-spacing: 0.8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; box-shadow: 0 4px 12px rgba(37,99,235,0.25);">
-            🏢 SSSAM ACADEMY
-        </div>
-    </div>
+            <div class="logo-circle">
+                <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto;" />
+            </div>
             <div class="brand-title">SSSAM Academy</div>
             <div class="brand-sub">Corporate Talent Sourcing & HR Hiring Partner</div>
             <div class="blue-divider"></div>
@@ -180,6 +173,7 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #2d3748; background-color: #f7fafc; margin: 0; padding: 20px; }
         .email-card { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
         .header-logo { text-align: center; padding: 30px 20px 15px; }
+        .logo-circle { margin: 0 auto 10px; display: inline-block; }
         .brand-title { font-size: 20px; font-weight: 700; color: #1a202c; margin: 0; }
         .brand-sub { font-size: 12px; color: #0f766e; font-weight: 600; margin: 3px 0 10px; }
         .blue-divider { width: 40px; height: 3px; background-color: #0f766e; margin: 0 auto; border-radius: 2px; }
@@ -195,12 +189,9 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
 <body>
     <div class="email-card">
         <div class="header-logo">
-            <div style="margin: 0 auto 12px; text-align: center;">
-        <img src="https://raw.githubusercontent.com/hicker467-cell/email/main/public/logo.png" alt="SSSAM ACADEMY" style="max-width: 160px; height: auto; display: block; margin: 0 auto; border: 0;" onerror="this.style.display='none';" />
-        <div style="display: inline-block; background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%); color: #ffffff; padding: 10px 22px; border-radius: 30px; font-weight: 800; font-size: 17px; letter-spacing: 0.8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; box-shadow: 0 4px 12px rgba(20,184,166,0.25);">
-            💼 SSSAM ACADEMY
-        </div>
-    </div>
+            <div class="logo-circle">
+                <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto;" />
+            </div>
             <div class="brand-title">SSSAM Academy</div>
             <div class="brand-sub">Campus Placement & Industry Hiring Partnership</div>
             <div class="blue-divider"></div>
@@ -243,12 +234,7 @@ const QUICK_BRIEFING_TEMPLATE = `<!DOCTYPE html>
 <body>
     <div class="email-card">
         <div style="text-align: center; margin-bottom: 20px;">
-            <div style="margin: 0 auto 10px; text-align: center;">
-        <img src="https://raw.githubusercontent.com/hicker467-cell/email/main/public/logo.png" alt="SSSAM ACADEMY" style="max-width: 140px; height: auto; display: block; margin: 0 auto; border: 0;" onerror="this.style.display='none';" />
-        <div style="display: inline-block; background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); color: #ffffff; padding: 8px 18px; border-radius: 24px; font-weight: 800; font-size: 15px; letter-spacing: 0.8px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-            ⚡ SSSAM ACADEMY
-        </div>
-    </div>
+            <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 75px; height: auto;" />
             <div style="font-weight: 700; font-size: 18px; color: #1e3a8a; margin-top: 6px;">SSSAM ACADEMY</div>
             <div style="font-size: 12px; color: #64748b;">Smart Solutions School of AI & Machine Learning</div>
         </div>
