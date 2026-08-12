@@ -1,4 +1,4 @@
-// Next.js API route for Brevo (Sendinblue) email sending with detailed failure diagnostic messages
+// Next.js API route for Brevo (Sendinblue) email sending prioritizing environment variables
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method Not Allowed' });
@@ -7,14 +7,15 @@ export default async function handler(req, res) {
   try {
     const { apiKey, senderName, senderEmail, recipientEmail, recipientName, subject, htmlContent } = req.body;
 
-    const brevoKey = apiKey || process.env.BREVO_API_KEY;
-    const fromName = senderName || process.env.SENDER_NAME || 'SSSAM Academy';
-    const fromEmail = senderEmail || process.env.SENDER_EMAIL || 'placements@sssamacademy.com';
+    // Prioritize process.env.BREVO_API_KEY set in Vercel
+    const brevoKey = (process.env.BREVO_API_KEY && process.env.BREVO_API_KEY.trim()) || apiKey;
+    const fromName = (process.env.SENDER_NAME && process.env.SENDER_NAME.trim()) || senderName || 'SSSAM Academy';
+    const fromEmail = (process.env.SENDER_EMAIL && process.env.SENDER_EMAIL.trim()) || senderEmail || 'placements@sssamacademy.com';
 
     if (!brevoKey) {
       return res.status(400).json({
         success: false,
-        error: 'Brevo API Key is missing. Please set BREVO_API_KEY in Vercel or UI.'
+        error: 'Brevo API Key is missing. Please set BREVO_API_KEY in Vercel Environment Variables.'
       });
     }
 
