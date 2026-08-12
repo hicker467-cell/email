@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSSAM Academy - College Email Dispatcher (Brevo Powered)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-container">
+        
+        <!-- Header Navbar -->
+        <header class="app-header">
+            <div class="brand-box">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <div>
+                    <h1>SSSAM ACADEMY</h1>
+                    <p class="subtitle">College Outreach & Seminar Bulk Email Dispatcher</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <div id="brevo-status-badge" class="badge badge-warning">
+                    <i class="fa-solid fa-circle-dot"></i> Brevo API: Not Configured
+                </div>
+                <button id="btn-load-sample" class="btn btn-outline-light">
+                    <i class="fa-solid fa-file-csv"></i> Load Sample CSV
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Workspace Layout -->
+        <div class="workspace-grid">
+            
+            <!-- Left Sidebar Controls -->
+            <aside class="sidebar-panel">
+                
+                <!-- Card 1: Brevo Credentials -->
+                <div class="card glass-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-key text-primary"></i> 1. Brevo API Setup</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="brevo-api-key">Brevo API Key (v3)</label>
+                            <div class="input-with-icon">
+                                <i class="fa-solid fa-shield-halved"></i>
+                                <input type="password" id="brevo-api-key" placeholder="xkeysib-..." autocomplete="off">
+                                <button type="button" id="btn-toggle-key" class="icon-btn"><i class="fa-solid fa-eye"></i></button>
+                            </div>
+                            <small class="help-text">Saved locally in your browser. Get yours from <a href="https://app.brevo.com/settings/keys/api" target="_blank" rel="noopener">Brevo Keys</a>.</small>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="sender-name">Sender Name</label>
+                                <input type="text" id="sender-name" value="SSSAM Academy">
+                            </div>
+                            <div class="form-group half">
+                                <label for="sender-email">Sender Email</label>
+                                <input type="email" id="sender-email" placeholder="corporate@sssamacademy.com">
+                            </div>
+                        </div>
+
+                        <button id="btn-test-brevo" class="btn btn-secondary btn-full">
+                            <i class="fa-solid fa-plug"></i> Test Brevo Connection
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Card 2: CSV Upload & Mapping -->
+                <div class="card glass-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-file-excel text-success"></i> 2. Recipient CSV Upload</h2>
+                    </div>
+                    <div class="card-body">
+                        
+                        <div id="csv-dropzone" class="dropzone">
+                            <i class="fa-solid fa-cloud-arrow-up drop-icon"></i>
+                            <p class="drop-title">Drag & Drop College CSV File</p>
+                            <p class="drop-sub">or click to browse from computer</p>
+                            <input type="file" id="csv-file-input" accept=".csv">
+                        </div>
+
+                        <div id="csv-info" class="csv-info-box hidden">
+                            <span class="file-name" id="loaded-filename">colleges.csv</span>
+                            <span class="badge badge-info" id="recipient-count">0 Colleges Loaded</span>
+                        </div>
+
+                        <!-- Column Mapping Accordion -->
+                        <div id="mapping-box" class="mapping-container hidden">
+                            <label class="section-label">Field Mapping (Match CSV Columns):</label>
+                            
+                            <div class="mapping-grid">
+                                <div class="map-item">
+                                    <span>Email Address <span class="required">*</span></span>
+                                    <select id="map-email"></select>
+                                </div>
+                                <div class="map-item">
+                                    <span>Contact Person</span>
+                                    <select id="map-contact"></select>
+                                </div>
+                                <div class="map-item">
+                                    <span>College Name</span>
+                                    <select id="map-college"></select>
+                                </div>
+                                <div class="map-item">
+                                    <span>Designation</span>
+                                    <select id="map-designation"></select>
+                                </div>
+                                <div class="map-item">
+                                    <span>City</span>
+                                    <select id="map-city"></select>
+                                </div>
+                                <div class="map-item">
+                                    <span>Seminar Topic</span>
+                                    <select id="map-topic"></select>
+                                </div>
+                                <div class="map-item">
+                                    <span>Proposed Date</span>
+                                    <select id="map-date"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Card 3: Template Selector -->
+                <div class="card glass-card">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-envelope-open-text text-warning"></i> 3. Email Template</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="template-select">Select Built-in Template</label>
+                            <select id="template-select" class="form-select">
+                                <!-- Populated dynamically from templates.js -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="email-subject">Email Subject Line</label>
+                            <input type="text" id="email-subject" value="Proposal: Free Campus Technical Workshop on {Seminar_Topic} - SSSAM Academy">
+                            <small class="help-text">Variables allowed: <code>{College_Name}</code>, <code>{Contact_Person}</code>, <code>{Seminar_Topic}</code>, <code>{City}</code>, <code>{Proposed_Date}</code></small>
+                        </div>
+                    </div>
+                </div>
+
+            </aside>
+
+            <!-- Center/Right Content Area -->
+            <main class="main-panel">
+                
+                <!-- Recipient Preview Table Card -->
+                <div class="card glass-card">
+                    <div class="card-header flex-between">
+                        <h2><i class="fa-solid fa-users text-accent"></i> Imported Colleges List</h2>
+                        <div class="table-controls">
+                            <input type="text" id="table-search" placeholder="Search college or city..." class="search-input">
+                            <button id="btn-select-all" class="btn btn-sm btn-outline">Select All</button>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="data-table" id="recipients-table">
+                                <thead>
+                                    <tr>
+                                        <th width="40"><input type="checkbox" id="chk-all-header" checked></th>
+                                        <th>College Name</th>
+                                        <th>Contact Person</th>
+                                        <th>Email</th>
+                                        <th>City</th>
+                                        <th>Seminar Topic</th>
+                                        <th>Date</th>
+                                        <th>Preview</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recipients-tbody">
+                                    <tr>
+                                        <td colspan="9" class="empty-state">
+                                            <i class="fa-solid fa-folder-open"></i>
+                                            <p>No CSV data loaded yet. Click <strong>"Load Sample CSV"</strong> above or drag your college list CSV.</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Live Email Preview & Dispatch Console Section -->
+                <div class="preview-dispatch-grid">
+                    
+                    <!-- Email Live HTML Preview -->
+                    <div class="card glass-card preview-card">
+                        <div class="card-header flex-between">
+                            <h2><i class="fa-solid fa-eye text-primary"></i> Live Email Render Preview</h2>
+                            <div class="view-toggle">
+                                <button class="view-btn active" data-view="desktop" title="Desktop View"><i class="fa-solid fa-desktop"></i></button>
+                                <button class="view-btn" data-view="mobile" title="Mobile View"><i class="fa-solid fa-mobile-screen-button"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="preview-address-bar">
+                                <div><strong>To:</strong> <span id="preview-to">tpo@dtu.ac.in</span></div>
+                                <div><strong>Subject:</strong> <span id="preview-subject-rendered">Proposal: Free Technical Workshop - SSSAM Academy</span></div>
+                            </div>
+                            <div class="iframe-container" id="iframe-wrap">
+                                <iframe id="preview-iframe" title="Email HTML Preview"></iframe>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dispatch Controls & Live Logs -->
+                    <div class="card glass-card dispatch-card">
+                        <div class="card-header flex-between">
+                            <h2><i class="fa-solid fa-paper-plane text-success"></i> Brevo Bulk Dispatch</h2>
+                            <button id="btn-export-log" class="btn btn-sm btn-outline-success" disabled>
+                                <i class="fa-solid fa-download"></i> Export Log CSV
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            
+                            <!-- Progress Metrics -->
+                            <div class="metrics-grid">
+                                <div class="metric-box">
+                                    <span class="metric-val" id="metric-total">0</span>
+                                    <span class="metric-lbl">Total</span>
+                                </div>
+                                <div class="metric-box green">
+                                    <span class="metric-val" id="metric-sent">0</span>
+                                    <span class="metric-lbl">Sent</span>
+                                </div>
+                                <div class="metric-box red">
+                                    <span class="metric-val" id="metric-failed">0</span>
+                                    <span class="metric-lbl">Failed</span>
+                                </div>
+                                <div class="metric-box blue">
+                                    <span class="metric-val" id="metric-pending">0</span>
+                                    <span class="metric-lbl">Pending</span>
+                                </div>
+                            </div>
+
+                            <!-- Progress Bar -->
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="progress-bar-fill" style="width: 0%;"></div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="action-buttons">
+                                <button id="btn-send-bulk" class="btn btn-success btn-lg btn-full" disabled>
+                                    <i class="fa-solid fa-paper-plane"></i> Send Emails via Brevo
+                                </button>
+                                <button id="btn-stop-bulk" class="btn btn-danger btn-full hidden">
+                                    <i class="fa-solid fa-hand"></i> Stop Dispatch
+                                </button>
+                            </div>
+
+                            <!-- Live Log Box -->
+                            <div class="log-container">
+                                <div class="log-header">Execution Activity Log:</div>
+                                <div class="log-box" id="dispatch-logs">
+                                    <div class="log-entry system"><i class="fa-solid fa-circle-info"></i> System initialized. Configure Brevo API Key and load CSV to begin.</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="templates.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
