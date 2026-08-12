@@ -14,29 +14,23 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
         .brand-title { font-size: 20px; font-weight: 700; color: #1a202c; margin: 0; letter-spacing: -0.2px; }
         .brand-sub { font-size: 12px; color: #64748b; margin: 3px 0 10px; }
         .blue-divider { width: 40px; height: 3px; background-color: #2563eb; margin: 0 auto; border-radius: 2px; }
-        
         .body-content { padding: 25px 35px 30px; font-size: 14px; color: #334155; }
         .salutation { font-size: 14px; margin-bottom: 14px; }
         .para { margin-bottom: 14px; line-height: 1.6; }
-        
         .section-title { font-weight: 700; font-size: 14px; color: #0f172a; margin: 20px 0 8px; }
         .tech-list { font-size: 13px; color: #334155; line-height: 1.8; margin-bottom: 18px; }
         .tech-list strong { color: #1e293b; }
-        
         .callout-box { background: #f0f7ff; border-left: 4px solid #2563eb; padding: 14px 18px; margin: 18px 0; border-radius: 0 6px 6px 0; }
         .callout-title { font-weight: 700; font-size: 15px; color: #1e293b; margin-bottom: 3px; }
         .callout-badge { font-weight: 700; font-size: 13px; color: #2563eb; letter-spacing: 0.3px; }
         .callout-note { font-size: 11px; color: #64748b; margin-top: 6px; font-style: italic; }
-        
         .btn-wrapper { text-align: center; margin: 24px 0 16px; }
         .btn-blue { background-color: #2563eb; color: #ffffff !important; padding: 12px 26px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 13px; display: inline-block; }
         .sub-link { display: block; text-align: center; color: #2563eb; font-size: 12px; font-weight: 600; text-decoration: none; margin-top: 10px; }
-        
         .sign-off { margin-top: 25px; border-top: 1px solid #f1f5f9; padding-top: 15px; font-size: 13px; color: #475569; }
         .company-title { font-weight: 700; color: #0f172a; font-size: 14px; margin: 2px 0; }
         .contact-info { margin-top: 8px; font-size: 12px; color: #64748b; line-height: 1.6; }
         .contact-info a { color: #2563eb; text-decoration: none; }
-        
         .footer-bar { background-color: #f8fafc; border-top: 1px solid #f1f5f9; padding: 12px; text-align: center; font-size: 11px; color: #94a3b8; }
     </style>
 </head>
@@ -128,18 +122,15 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
             <div class="brand-sub">Campus Placement & Industry Hiring Partnership</div>
             <div class="blue-divider"></div>
         </div>
-
         <div class="body-content">
             <div style="font-size: 14px; margin-bottom: 14px;">Dear Head of Training & Placement / Dean,</div>
             <p style="margin-bottom: 14px;">Greetings from <strong>SSSAM Academy, Gurugram</strong>.</p>
-            <p style="margin-bottom: 14px;">We are writing to explore a <strong>Campus Placement & Industry Hiring Partnership</strong> with your college to provide students with direct career opportunities in top IT firms.</p>
+            <p style="margin-bottom: 14px;">We are writing to explore a <strong>Campus Placement & Industry Hiring Partnership</strong> with your college.</p>
 
             <div class="callout-box">
                 <div style="font-weight: 700; color: #166534; font-size: 15px;">Placement Sourcing & Recruitment Drives</div>
                 <div style="font-size: 13px; color: #15803d; margin-top: 4px;">• On-Campus & Virtual Recruitment Drives<br>• Pre-Placement Technical Assessment<br>• Resume Building & Technical Mock Interviews</div>
             </div>
-
-            <p style="margin-bottom: 14px;">Our candidates undergo training in <strong>Full-Stack, Data Science, AI/ML, Cyber Security, and Cloud Computing</strong>.</p>
 
             <div class="btn-wrapper">
                 <a href="https://www.sssamacademy.com/college-training.html" target="_blank" class="btn-green">Explore Placement Partnership &rarr;</a>
@@ -177,14 +168,12 @@ const QUICK_BRIEFING_TEMPLATE = `<!DOCTYPE html>
         </div>
 
         <p>Dear Sir/Madam,</p>
-        <p>On behalf of <strong>SSSAM Academy, Sector 14, Gurugram</strong>, I would like to propose a <strong>Free Hands-on Technical Seminar</strong> for your students on <strong>AI/ML, Full-Stack Development, Cybersecurity, and Cloud Computing</strong>.</p>
+        <p>On behalf of <strong>SSSAM Academy, Sector 14, Gurugram</strong>, I would like to propose a <strong>Free Hands-on Technical Seminar</strong> for your students.</p>
         
         <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 16px; margin: 16px 0; font-size: 13px;">
             <strong>Duration:</strong> 90 to 120 Minutes (Interactive Demo + Student Q&A)<br>
             <strong>Cost:</strong> Free of Training Charges for Partner Colleges
         </div>
-
-        <p>Could you please connect us with your TPO / HOD / Coordinator to schedule a suitable date?</p>
 
         <div style="text-align: center; margin: 20px 0;">
             <a href="https://www.sssamacademy.com/college-training.html" target="_blank" class="btn-blue">View Seminar Details &rarr;</a>
@@ -227,6 +216,11 @@ export default function Dashboard() {
   const [htmlContent, setHtmlContent] = useState(OFFICIAL_SSSAM_TEMPLATE);
   const [showPreview, setShowPreview] = useState(false);
 
+  // Dual Recipient Mode: 'csv' vs 'single'
+  const [inputMode, setInputMode] = useState('csv');
+  const [manualEmail, setManualEmail] = useState('');
+  const [manualName, setManualName] = useState('');
+
   const [recipients, setRecipients] = useState([]);
   const [isSending, setIsSending] = useState(false);
   const [logs, setLogs] = useState([]);
@@ -253,6 +247,50 @@ export default function Dashboard() {
       setHtmlContent(selected.html);
       setSubject(selected.subject);
       addLog(`Template selected: ${selected.name}`, 'green');
+    }
+  };
+
+  // Add Manual Email One-by-One
+  const handleAddManualEmail = (e) => {
+    e.preventDefault();
+    if (!manualEmail || !manualEmail.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    const trimmedEmail = manualEmail.trim();
+    // Check if email already exists in table
+    if (recipients.some((r) => r.email.toLowerCase() === trimmedEmail.toLowerCase())) {
+      alert(`Email ${trimmedEmail} is already in the list!`);
+      return;
+    }
+
+    const newRecipient = {
+      id: Date.now() + Math.random(),
+      email: trimmedEmail,
+      name: manualName.trim() || trimmedEmail.split('@')[0],
+      status: 'Pending ⏳',
+      reason: '-',
+      time: '-',
+      messageId: '-'
+    };
+
+    setRecipients((prev) => [newRecipient, ...prev]);
+    setManualEmail('');
+    setManualName('');
+    addLog(`Added recipient manually: ${trimmedEmail}`, 'green');
+  };
+
+  // Remove individual recipient
+  const handleRemoveRecipient = (id) => {
+    setRecipients((prev) => prev.filter((r) => r.id !== id));
+  };
+
+  // Clear All Recipients
+  const handleClearAll = () => {
+    if (confirm('Clear all recipient emails from table?')) {
+      setRecipients([]);
+      addLog('Cleared all recipient emails.', 'red');
     }
   };
 
@@ -408,7 +446,7 @@ export default function Dashboard() {
   const handleStartDispatch = async (targetList = null) => {
     const listToProcess = targetList || recipients;
     if (listToProcess.length === 0) {
-      alert('No recipients available to send. Please upload a CSV file.');
+      alert('No recipients available to send. Upload a CSV or add an email manually.');
       return;
     }
 
@@ -500,12 +538,12 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid" style={{ gridTemplateColumns: showPreview ? '420px 1fr' : '420px 1fr' }}>
+      <div className="grid">
         {/* Left Column Controls */}
         <div>
-          {/* Card 1: Select Template & CSV Upload */}
+          {/* Card 1: Select Template & Add Recipients */}
           <div className="card">
-            <h2 className="card-title">📂 1. Select Template & Upload CSV</h2>
+            <h2 className="card-title">📂 1. Select Template & Add Recipients</h2>
             
             <div className="form-group">
               <label>Choose Email Template</label>
@@ -531,11 +569,62 @@ export default function Dashboard() {
               </select>
             </div>
 
-            <div className="dropzone" style={{ marginTop: '12px' }}>
-              <p style={{ fontSize: '14px', fontWeight: '600' }}>Drop College CSV File Here</p>
-              <p style={{ fontSize: '12px', color: '#94a3b8', margin: '4px 0 10px' }}>Requires an "Email" column</p>
-              <input type="file" accept=".csv" onChange={handleFileUpload} />
+            {/* Recipient Input Mode Toggle */}
+            <div style={{ display: 'flex', gap: '6px', margin: '14px 0 10px' }}>
+              <button
+                type="button"
+                onClick={() => setInputMode('csv')}
+                className={`btn ${inputMode === 'csv' ? 'btn-primary' : 'btn-outline'}`}
+                style={{ flex: 1, fontSize: '12px', padding: '6px' }}
+              >
+                📁 Upload CSV File
+              </button>
+              <button
+                type="button"
+                onClick={() => setInputMode('single')}
+                className={`btn ${inputMode === 'single' ? 'btn-primary' : 'btn-outline'}`}
+                style={{ flex: 1, fontSize: '12px', padding: '6px' }}
+              >
+                ✉️ Add Single Email
+              </button>
             </div>
+
+            {/* Mode A: CSV Dropzone */}
+            {inputMode === 'csv' && (
+              <div className="dropzone">
+                <p style={{ fontSize: '14px', fontWeight: '600' }}>Drop College CSV File Here</p>
+                <p style={{ fontSize: '12px', color: '#94a3b8', margin: '4px 0 10px' }}>Requires an "Email" column</p>
+                <input type="file" accept=".csv" onChange={handleFileUpload} />
+              </div>
+            )}
+
+            {/* Mode B: Manual Single / One-by-One Email Input */}
+            {inputMode === 'single' && (
+              <form onSubmit={handleAddManualEmail} style={{ background: 'rgba(15,23,42,0.5)', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <div className="form-group" style={{ marginBottom: '8px' }}>
+                  <label>Recipient Email Address *</label>
+                  <input
+                    type="email"
+                    placeholder="tpo@college.ac.in"
+                    value={manualEmail}
+                    onChange={(e) => setManualEmail(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="form-group" style={{ marginBottom: '10px' }}>
+                  <label>College / Recipient Name (Optional)</label>
+                  <input
+                    type="text"
+                    placeholder="Delhi Technological University"
+                    value={manualName}
+                    onChange={(e) => setManualName(e.target.value)}
+                  />
+                </div>
+                <button type="submit" className="btn btn-success btn-full" style={{ padding: '8px', fontSize: '13px' }}>
+                  ➕ Add Recipient to List
+                </button>
+              </form>
+            )}
           </div>
 
           {/* Card 2: Dispatch Controller & Execution Logs */}
@@ -589,10 +678,15 @@ export default function Dashboard() {
           <div className="card">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
               <h2 className="card-title" style={{ margin: 0 }}>📊 Live Recipient Delivery Tracker</h2>
-              <div style={{ display: 'flex', gap: '8px' }}>
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
                 <span className="badge badge-success">Sent: {sentCount}</span>
                 <span className="badge badge-danger">Failed: {failedCount}</span>
                 <span className="badge badge-warning">Pending: {pendingCount}</span>
+                {recipients.length > 0 && (
+                  <button onClick={handleClearAll} className="btn btn-outline" style={{ padding: '2px 8px', fontSize: '11px', color: '#f87171', borderColor: '#f87171' }}>
+                    🗑️ Clear List
+                  </button>
+                )}
               </div>
             </div>
 
@@ -648,14 +742,14 @@ export default function Dashboard() {
                     <th>Email Address</th>
                     <th>Status</th>
                     <th>Reason / Error Diagnostic</th>
-                    <th>Time</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredRecipients.length === 0 ? (
                     <tr>
                       <td colSpan="5" style={{ textAlign: 'center', padding: '20px', color: '#94a3b8' }}>
-                        No records match the current filter.
+                        No records in list. Upload a CSV or add an email address manually above.
                       </td>
                     </tr>
                   ) : (
@@ -680,13 +774,27 @@ export default function Dashboard() {
                           style={{
                             fontSize: '12px',
                             color: rec.status.includes('Failed') ? '#f87171' : '#94a3b8',
-                            maxWidth: '220px',
+                            maxWidth: '200px',
                             wordBreak: 'break-word'
                           }}
                         >
                           {rec.reason}
                         </td>
-                        <td style={{ fontSize: '11px', color: '#94a3b8' }}>{rec.time}</td>
+                        <td>
+                          <button
+                            onClick={() => handleRemoveRecipient(rec.id)}
+                            style={{
+                              background: 'none',
+                              border: 'none',
+                              color: '#94a3b8',
+                              cursor: 'pointer',
+                              fontSize: '12px'
+                            }}
+                            title="Remove from list"
+                          >
+                            ❌
+                          </button>
+                        </td>
                       </tr>
                     ))
                   )}
