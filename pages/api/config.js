@@ -3,7 +3,7 @@ export default function handler(req, res) {
   res.status(200).json({
     hasEnvApiKey: Boolean(process.env.BREVO_API_KEY),
     senderName: process.env.SENDER_NAME || 'SSSAM Academy',
-    senderEmail: process.env.SENDER_EMAIL || 'hr.sssamacademy@gmail.com',
+    senderEmail: process.env.SENDER_EMAIL || 'placements@sssamacademy.com',
     defaultSubject: process.env.DEFAULT_SUBJECT || 'Proposal: College Technical Workshops & Career Seminars - SSSAM Academy'
   });
 }

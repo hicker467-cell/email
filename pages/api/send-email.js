@@ -9,7 +9,7 @@ export default async function handler(req, res) {
 
     const brevoKey = apiKey || process.env.BREVO_API_KEY;
     const fromName = senderName || process.env.SENDER_NAME || 'SSSAM Academy';
-    const fromEmail = senderEmail || process.env.SENDER_EMAIL || 'hr.sssamacademy@gmail.com';
+    const fromEmail = senderEmail || process.env.SENDER_EMAIL || 'placements@sssamacademy.com';
 
     if (!brevoKey) {
       return res.status(400).json({
@@ -54,7 +54,6 @@ export default async function handler(req, res) {
     if (!response.ok) {
       let friendlyReason = data.message || 'Failed to send email via Brevo.';
 
-      // Enhance common Brevo HTTP error codes with clear user-friendly reasons
       if (response.status === 401) {
         friendlyReason = '401 Unauthorized: Invalid or missing Brevo API Key.';
       } else if (response.status === 400 && data.code === 'unauthorized_sender') {
