@@ -126,16 +126,13 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
             <div style="font-size: 14px; margin-bottom: 14px;">Dear Head of Training & Placement / Dean,</div>
             <p style="margin-bottom: 14px;">Greetings from <strong>SSSAM Academy, Gurugram</strong>.</p>
             <p style="margin-bottom: 14px;">We are writing to explore a <strong>Campus Placement & Industry Hiring Partnership</strong> with your college.</p>
-
             <div class="callout-box">
                 <div style="font-weight: 700; color: #166534; font-size: 15px;">Placement Sourcing & Recruitment Drives</div>
                 <div style="font-size: 13px; color: #15803d; margin-top: 4px;">• On-Campus & Virtual Recruitment Drives<br>• Pre-Placement Technical Assessment<br>• Resume Building & Technical Mock Interviews</div>
             </div>
-
             <div class="btn-wrapper">
                 <a href="https://www.sssamacademy.com/college-training.html" target="_blank" class="btn-green">Explore Placement Partnership &rarr;</a>
             </div>
-
             <div class="sign-off">
                 <div>Warm Regards,</div>
                 <div style="font-weight: 700; color: #0f172a; font-size: 14px; margin: 2px 0;">Training & Placement Cell</div>
@@ -166,19 +163,15 @@ const QUICK_BRIEFING_TEMPLATE = `<!DOCTYPE html>
             <div style="font-weight: 700; font-size: 18px; color: #1e3a8a; margin-top: 6px;">SSSAM ACADEMY</div>
             <div style="font-size: 12px; color: #64748b;">Smart Solutions School of AI & Machine Learning</div>
         </div>
-
         <p>Dear Sir/Madam,</p>
         <p>On behalf of <strong>SSSAM Academy, Sector 14, Gurugram</strong>, I would like to propose a <strong>Free Hands-on Technical Seminar</strong> for your students.</p>
-        
         <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 16px; margin: 16px 0; font-size: 13px;">
             <strong>Duration:</strong> 90 to 120 Minutes (Interactive Demo + Student Q&A)<br>
             <strong>Cost:</strong> Free of Training Charges for Partner Colleges
         </div>
-
         <div style="text-align: center; margin: 20px 0;">
             <a href="https://www.sssamacademy.com/college-training.html" target="_blank" class="btn-blue">View Seminar Details &rarr;</a>
         </div>
-
         <p style="margin-top: 25px; border-top: 1px solid #f1f5f9; padding-top: 15px; font-size: 13px; color: #475569;">
             Warm Regards,<br>
             <strong>Institutional Outreach Team</strong><br>
@@ -216,7 +209,7 @@ export default function Dashboard() {
   const [htmlContent, setHtmlContent] = useState(OFFICIAL_SSSAM_TEMPLATE);
   const [showPreview, setShowPreview] = useState(false);
 
-  // Dual Recipient Mode: 'csv' vs 'single'
+  // Dual Recipient Mode: 'single' vs 'csv'
   const [inputMode, setInputMode] = useState('single');
   const [manualEmail, setManualEmail] = useState('');
   const [manualName, setManualName] = useState('');
@@ -373,7 +366,6 @@ export default function Dashboard() {
     const timestamp = new Date().toLocaleTimeString();
     const renderedHtml = htmlContent.replace(/{Email}/g, rec.email);
 
-    // Update row status to sending...
     setRecipients((prev) =>
       prev.map((item) => (item.id === rec.id ? { ...item, status: 'Sending...' } : item))
     );
@@ -525,15 +517,23 @@ export default function Dashboard() {
           <h1>SSSAM ACADEMY</h1>
           <p>College Outreach & Bulk Email Dispatcher</p>
         </div>
-        <div style={{ display: 'flex', gap: '10px' }}>
+        <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          <button
+            onClick={() => handleStartDispatch()}
+            disabled={isSending || recipients.length === 0}
+            className="btn btn-success"
+            style={{ fontWeight: '700', padding: '10px 20px', boxShadow: '0 4px 12px rgba(16, 185, 129, 0.4)' }}
+          >
+            {isSending ? 'Sending Emails...' : `🚀 Send All (${recipients.length})`}
+          </button>
           <button onClick={handleLoadSample} className="btn btn-primary">
-            📁 Load Sample CSV
+            📁 Sample CSV
           </button>
           <button onClick={() => setShowPreview(!showPreview)} className="btn btn-outline" style={{ color: '#fff', borderColor: '#38bdf8' }}>
-            {showPreview ? '🙈 Hide Email Preview' : '👁️ View Email Preview'}
+            {showPreview ? '🙈 Hide Preview' : '👁️ View Preview'}
           </button>
-          <button onClick={handleExportCSV} disabled={recipients.length === 0} className="btn btn-success">
-            📥 Export Report CSV
+          <button onClick={handleExportCSV} disabled={recipients.length === 0} className="btn btn-success" style={{ background: '#0f766e' }}>
+            📥 Export CSV
           </button>
         </div>
       </div>
@@ -629,7 +629,7 @@ export default function Dashboard() {
 
           {/* Card 2: Dispatch Controller & Execution Logs */}
           <div className="card">
-            <h2 className="card-title">🚀 2. Campaign Dispatcher</h2>
+            <h2 className="card-title">🚀 2. Campaign Settings & Logs</h2>
             <div className="form-group">
               <label>Subject Line</label>
               <input
@@ -644,7 +644,7 @@ export default function Dashboard() {
                 onClick={() => handleStartDispatch()}
                 disabled={isSending || recipients.length === 0}
                 className="btn btn-success"
-                style={{ flex: 1, padding: '14px', fontSize: '15px' }}
+                style={{ flex: 1, padding: '14px', fontSize: '15px', fontWeight: '700' }}
               >
                 {isSending ? 'Sending Emails...' : `🚀 Send All (${recipients.length})`}
               </button>
