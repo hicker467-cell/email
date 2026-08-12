@@ -6,6 +6,7 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #2d3748; background-color: #f7fafc; margin: 0; padding: 20px; }
         .email-card { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
@@ -36,15 +37,17 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
 </head>
 <body>
     <div class="email-card">
+        <!-- Logo & Header -->
         <div class="header-logo">
             <div class="logo-circle">
-                <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto;" />
+                <img src="https://sssam-email.vercel.app/logo.png" alt="SSSAM Academy Logo" style="max-width: 90px; height: auto;" />
             </div>
             <div class="brand-title">SSSAM Academy</div>
             <div class="brand-sub">Smart Solutions School of AI & Machine Learning</div>
             <div class="blue-divider"></div>
         </div>
 
+        <!-- Body Content -->
         <div class="body-content">
             <div class="salutation">Dear Sir/Madam,</div>
             <div class="para">Greetings from <strong>SSSAM Academy, Gurugram</strong>.</div>
@@ -59,6 +62,7 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
                 <strong>CCNA & CCNP</strong> &nbsp;•&nbsp; <strong>AWS, Cloud & DevOps</strong>
             </div>
 
+            <!-- Callout Box -->
             <div class="callout-box">
                 <div class="callout-title">One-Day Technical Workshop</div>
                 <div class="callout-badge">FREE OF TRAINING CHARGES</div>
@@ -69,6 +73,7 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
             <div style="font-size: 13px; color: #475569; margin-bottom: 14px;">Technical Seminars &nbsp;•&nbsp; Guest Lectures &nbsp;•&nbsp; Hands-on Workshops &nbsp;•&nbsp; Industrial Training &nbsp;•&nbsp; Project-Based Training</div>
             <div class="para">Sessions can be customized according to the <strong>department, student level, preferred topic and academic schedule</strong>.</div>
 
+            <!-- CTA Buttons -->
             <div class="btn-wrapper">
                 <a href="https://www.sssamacademy.com/college-training.html" target="_blank" class="btn-blue">Explore College Training & Seminars &rarr;</a>
                 <a href="https://www.sssamacademy.com/gallery.html" target="_blank" class="sub-link">View Recent Seminar Activities &rarr;</a>
@@ -77,13 +82,14 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
             <div class="para" style="margin-top: 20px;">We would be happy to discuss a suitable topic and format for your students.</div>
             <div class="para">Kindly let us know the concerned <strong>TPO / HOD / Coordinator</strong> with whom we may connect.</div>
 
+            <!-- Sign-off -->
             <div class="sign-off">
                 <div>Warm Regards,</div>
                 <div class="company-title">SSSAM Academy</div>
                 <div style="font-size: 12px; color: #64748b;">Smart Solutions School of AI & Machine Learning</div>
                 <div style="font-size: 12px; color: #64748b;">Gurugram, Haryana</div>
                 <div class="contact-info">
-                    <strong>Phone:</strong> 9102130958<br>
+                    <strong>Phone:</strong> 9102130956<br>
                     <strong>Email:</strong> <a href="mailto:placements@sssamacademy.com">placements@sssamacademy.com</a><br>
                     <strong>Website:</strong> <a href="http://www.sssamacademy.com" target="_blank">www.sssamacademy.com</a>
                 </div>
@@ -99,6 +105,7 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #2d3748; background-color: #f7fafc; margin: 0; padding: 20px; }
         .email-card { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
@@ -117,7 +124,7 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
 <body>
     <div class="email-card">
         <div class="header-logo">
-            <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto; margin-bottom: 8px;" />
+            <img src="https://sssam-email.vercel.app/logo.png" alt="SSSAM Academy Logo" style="max-width: 90px; height: auto; margin-bottom: 8px;" />
             <div class="brand-title">SSSAM Academy</div>
             <div class="brand-sub">Campus Placement & Industry Hiring Partnership</div>
             <div class="blue-divider"></div>
@@ -126,18 +133,21 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
             <div style="font-size: 14px; margin-bottom: 14px;">Dear Head of Training & Placement / Dean,</div>
             <p style="margin-bottom: 14px;">Greetings from <strong>SSSAM Academy, Gurugram</strong>.</p>
             <p style="margin-bottom: 14px;">We are writing to explore a <strong>Campus Placement & Industry Hiring Partnership</strong> with your college.</p>
+
             <div class="callout-box">
                 <div style="font-weight: 700; color: #166534; font-size: 15px;">Placement Sourcing & Recruitment Drives</div>
                 <div style="font-size: 13px; color: #15803d; margin-top: 4px;">• On-Campus & Virtual Recruitment Drives<br>• Pre-Placement Technical Assessment<br>• Resume Building & Technical Mock Interviews</div>
             </div>
+
             <div class="btn-wrapper">
                 <a href="https://www.sssamacademy.com/college-training.html" target="_blank" class="btn-green">Explore Placement Partnership &rarr;</a>
             </div>
+
             <div class="sign-off">
                 <div>Warm Regards,</div>
                 <div style="font-weight: 700; color: #0f172a; font-size: 14px; margin: 2px 0;">Training & Placement Cell</div>
                 <div style="font-size: 12px; color: #64748b;">SSSAM Academy, Gurugram</div>
-                <div style="font-size: 12px; color: #64748b; margin-top: 6px;">📞 +91 9102130958 | 📧 placements@sssamacademy.com | 🌐 www.sssamacademy.com</div>
+                <div style="font-size: 12px; color: #64748b; margin-top: 6px;">📞 9102130956 | 📧 placements@sssamacademy.com | 🌐 www.sssamacademy.com</div>
             </div>
         </div>
         <div class="footer-bar">SSSAM Academy | Gurugram</div>
@@ -150,6 +160,7 @@ const QUICK_BRIEFING_TEMPLATE = `<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #2d3748; background-color: #f7fafc; margin: 0; padding: 20px; }
         .email-card { max-width: 580px; margin: 0 auto; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; padding: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
@@ -159,7 +170,7 @@ const QUICK_BRIEFING_TEMPLATE = `<!DOCTYPE html>
 <body>
     <div class="email-card">
         <div style="text-align: center; margin-bottom: 20px;">
-            <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 75px; height: auto;" />
+            <img src="https://sssam-email.vercel.app/logo.png" alt="SSSAM Academy Logo" style="max-width: 80px; height: auto;" />
             <div style="font-weight: 700; font-size: 18px; color: #1e3a8a; margin-top: 6px;">SSSAM ACADEMY</div>
             <div style="font-size: 12px; color: #64748b;">Smart Solutions School of AI & Machine Learning</div>
         </div>
@@ -176,7 +187,7 @@ const QUICK_BRIEFING_TEMPLATE = `<!DOCTYPE html>
             Warm Regards,<br>
             <strong>Institutional Outreach Team</strong><br>
             SSSAM Academy, Sector 14, Gurugram<br>
-            📞 9102130958 | 📧 placements@sssamacademy.com | 🌐 www.sssamacademy.com
+            📞 9102130956 | 📧 placements@sssamacademy.com | 🌐 www.sssamacademy.com
         </p>
     </div>
 </body>
