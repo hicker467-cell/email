@@ -37,7 +37,6 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
 </head>
 <body>
     <div class="email-card">
-        <!-- Logo & Header -->
         <div class="header-logo">
             <div class="logo-circle">
                 <img src="https://sssam-email.vercel.app/logo.png" alt="SSSAM Academy Logo" style="max-width: 90px; height: auto;" />
@@ -46,8 +45,6 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
             <div class="brand-sub">Smart Solutions School of AI & Machine Learning</div>
             <div class="blue-divider"></div>
         </div>
-
-        <!-- Body Content -->
         <div class="body-content">
             <div class="salutation">Dear Sir/Madam,</div>
             <div class="para">Greetings from <strong>SSSAM Academy, Gurugram</strong>.</div>
@@ -62,7 +59,6 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
                 <strong>CCNA & CCNP</strong> &nbsp;•&nbsp; <strong>AWS, Cloud & DevOps</strong>
             </div>
 
-            <!-- Callout Box -->
             <div class="callout-box">
                 <div class="callout-title">One-Day Technical Workshop</div>
                 <div class="callout-badge">FREE OF TRAINING CHARGES</div>
@@ -73,7 +69,6 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
             <div style="font-size: 13px; color: #475569; margin-bottom: 14px;">Technical Seminars &nbsp;•&nbsp; Guest Lectures &nbsp;•&nbsp; Hands-on Workshops &nbsp;•&nbsp; Industrial Training &nbsp;•&nbsp; Project-Based Training</div>
             <div class="para">Sessions can be customized according to the <strong>department, student level, preferred topic and academic schedule</strong>.</div>
 
-            <!-- CTA Buttons -->
             <div class="btn-wrapper">
                 <a href="https://www.sssamacademy.com/college-training.html" target="_blank" class="btn-blue">Explore College Training & Seminars &rarr;</a>
                 <a href="https://www.sssamacademy.com/gallery.html" target="_blank" class="sub-link">View Recent Seminar Activities &rarr;</a>
@@ -82,7 +77,6 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
             <div class="para" style="margin-top: 20px;">We would be happy to discuss a suitable topic and format for your students.</div>
             <div class="para">Kindly let us know the concerned <strong>TPO / HOD / Coordinator</strong> with whom we may connect.</div>
 
-            <!-- Sign-off -->
             <div class="sign-off">
                 <div>Warm Regards,</div>
                 <div class="company-title">SSSAM Academy</div>
@@ -133,16 +127,13 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
             <div style="font-size: 14px; margin-bottom: 14px;">Dear Head of Training & Placement / Dean,</div>
             <p style="margin-bottom: 14px;">Greetings from <strong>SSSAM Academy, Gurugram</strong>.</p>
             <p style="margin-bottom: 14px;">We are writing to explore a <strong>Campus Placement & Industry Hiring Partnership</strong> with your college.</p>
-
             <div class="callout-box">
                 <div style="font-weight: 700; color: #166534; font-size: 15px;">Placement Sourcing & Recruitment Drives</div>
                 <div style="font-size: 13px; color: #15803d; margin-top: 4px;">• On-Campus & Virtual Recruitment Drives<br>• Pre-Placement Technical Assessment<br>• Resume Building & Technical Mock Interviews</div>
             </div>
-
             <div class="btn-wrapper">
                 <a href="https://www.sssamacademy.com/college-training.html" target="_blank" class="btn-green">Explore Placement Partnership &rarr;</a>
             </div>
-
             <div class="sign-off">
                 <div>Warm Regards,</div>
                 <div style="font-weight: 700; color: #0f172a; font-size: 14px; margin: 2px 0;">Training & Placement Cell</div>
@@ -533,17 +524,17 @@ export default function Dashboard() {
             onClick={() => handleStartDispatch()}
             disabled={isSending || recipients.length === 0}
             className="btn btn-success"
-            style={{ fontWeight: '700', padding: '10px 20px', boxShadow: '0 4px 12px rgba(16, 185, 129, 0.4)' }}
+            style={{ fontWeight: '700', padding: '10px 20px' }}
           >
             {isSending ? 'Sending Emails...' : `🚀 Send All (${recipients.length})`}
           </button>
           <button onClick={handleLoadSample} className="btn btn-primary">
             📁 Sample CSV
           </button>
-          <button onClick={() => setShowPreview(!showPreview)} className="btn btn-outline" style={{ color: '#fff', borderColor: '#38bdf8' }}>
+          <button onClick={() => setShowPreview(!showPreview)} className="btn btn-outline">
             {showPreview ? '🙈 Hide Preview' : '👁️ View Preview'}
           </button>
-          <button onClick={handleExportCSV} disabled={recipients.length === 0} className="btn btn-success" style={{ background: '#0f766e' }}>
+          <button onClick={handleExportCSV} disabled={recipients.length === 0} className="btn btn-outline">
             📥 Export CSV
           </button>
         </div>
@@ -567,7 +558,7 @@ export default function Dashboard() {
                   background: 'rgba(15, 23, 42, 0.9)',
                   border: '1px solid rgba(255, 255, 255, 0.2)',
                   borderRadius: '8px',
-                  color: '#38bdf8',
+                  color: '#60a5fa',
                   fontWeight: '600',
                   fontSize: '13px'
                 }}
@@ -622,7 +613,7 @@ export default function Dashboard() {
                     onChange={(e) => setManualName(e.target.value)}
                   />
                 </div>
-                <button type="submit" className="btn btn-success btn-full" style={{ padding: '8px', fontSize: '13px' }}>
+                <button type="submit" className="btn btn-primary btn-full" style={{ padding: '8px', fontSize: '13px' }}>
                   ➕ Add Recipient to List
                 </button>
               </form>
