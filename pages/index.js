@@ -16,13 +16,13 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
         .brand-sub { font-size: 12px; color: #64748b; margin: 3px 0 10px; }
         .blue-divider { width: 40px; height: 3px; background-color: #2563eb; margin: 0 auto; border-radius: 2px; }
         .body-content { padding: 25px 35px 30px; font-size: 14px; color: #334155; }
-        .salutation { font-size: 14px; margin-bottom: 14px; }
+        .salutation { font-size: 14px; margin-bottom: 14px; font-weight: 600; color: #0f172a; }
         .para { margin-bottom: 14px; line-height: 1.6; }
         .section-title { font-weight: 700; font-size: 14px; color: #0f172a; margin: 20px 0 8px; }
         .tech-list { font-size: 13px; color: #334155; line-height: 1.8; margin-bottom: 18px; }
         .tech-list strong { color: #1e293b; }
         .callout-box { background: #f0f7ff; border-left: 4px solid #2563eb; padding: 14px 18px; margin: 18px 0; border-radius: 0 6px 6px 0; }
-        .callout-title { font-weight: 700; font-size: 15px; color: #1e293b; margin-bottom: 3px; }
+        .callout-title { font-weight: 700; font-size: 15px; color: #1e3a8a; margin-bottom: 3px; }
         .callout-badge { font-weight: 700; font-size: 13px; color: #2563eb; letter-spacing: 0.3px; }
         .callout-note { font-size: 11px; color: #64748b; margin-top: 6px; font-style: italic; }
         .btn-wrapper { text-align: center; margin: 24px 0 16px; }
@@ -47,7 +47,7 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
         </div>
 
         <div class="body-content">
-            <div class="salutation">Dear Sir/Madam,</div>
+            <div class="salutation">{Salutation}</div>
             <div class="para">Greetings from <strong>SSSAM Academy, Gurugram</strong>.</div>
             <div class="para"><strong>SSSAM Academy</strong> conducts <strong>technical seminars, guest lectures, hands-on workshops and industry-oriented training programs</strong> for college students.</div>
             <div class="para">We would like to explore a collaboration with your institution for conducting a suitable technical session for your students.</div>
@@ -109,6 +109,7 @@ const CORPORATE_HIRING_TEMPLATE = `<!DOCTYPE html>
         .brand-sub { font-size: 12px; color: #2563eb; font-weight: 600; margin: 3px 0 10px; }
         .blue-divider { width: 40px; height: 3px; background-color: #2563eb; margin: 0 auto; border-radius: 2px; }
         .body-content { padding: 25px 35px 30px; font-size: 14px; color: #334155; }
+        .salutation { font-size: 14px; margin-bottom: 14px; font-weight: 600; color: #0f172a; }
         .callout-box { background: #eff6ff; border-left: 4px solid #2563eb; padding: 14px 18px; margin: 18px 0; border-radius: 0 6px 6px 0; }
         .btn-wrapper { text-align: center; margin: 24px 0 16px; }
         .btn-blue { background-color: #2563eb; color: #ffffff !important; padding: 12px 26px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 13px; display: inline-block; }
@@ -126,7 +127,7 @@ const CORPORATE_HIRING_TEMPLATE = `<!DOCTYPE html>
         </div>
 
         <div class="body-content">
-            <div style="font-size: 14px; margin-bottom: 14px;">Dear HR Manager / Talent Acquisition Team,</div>
+            <div class="salutation">{Salutation}</div>
             <p style="margin-bottom: 14px;">Greetings from <strong>SSSAM Academy, Gurugram</strong>.</p>
             <p style="margin-bottom: 14px;">SSSAM Academy is a specialized IT training institute focused on upskilling engineering and technology graduates into <strong>job-ready software & tech professionals</strong>.</p>
 
@@ -156,7 +157,7 @@ const CORPORATE_HIRING_TEMPLATE = `<!DOCTYPE html>
                 
                 <div style="margin-top: 10px; font-size: 12px; color: #64748b; line-height: 1.6;">
                     <strong>Phone:</strong> 9102130956<br>
-                    <strong>Email:</strong> <a href="mailto:hr.sssamacademy@gmail.com" style="color:#2563eb; font-weight:600;">hr.sssamacademy@gmail.com</a><br>
+                    <strong>Email:</strong> <a href="mailto:hr@sssamacademy.com" style="color:#2563eb; font-weight:600;">hr@sssamacademy.com</a><br>
                     <strong>Website:</strong> <a href="http://www.sssamacademy.com" target="_blank" style="color:#2563eb;">www.sssamacademy.com</a>
                 </div>
             </div>
@@ -180,6 +181,7 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
         .brand-sub { font-size: 12px; color: #0f766e; font-weight: 600; margin: 3px 0 10px; }
         .blue-divider { width: 40px; height: 3px; background-color: #0f766e; margin: 0 auto; border-radius: 2px; }
         .body-content { padding: 25px 35px 30px; font-size: 14px; color: #334155; }
+        .salutation { font-size: 14px; margin-bottom: 14px; font-weight: 600; color: #0f172a; }
         .callout-box { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 14px 18px; margin: 18px 0; border-radius: 0 6px 6px 0; }
         .btn-wrapper { text-align: center; margin: 24px 0 16px; }
         .btn-green { background-color: #0f766e; color: #ffffff !important; padding: 12px 26px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 13px; display: inline-block; }
@@ -196,7 +198,7 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
             <div class="blue-divider"></div>
         </div>
         <div class="body-content">
-            <div style="font-size: 14px; margin-bottom: 14px;">Dear Head of Training & Placement / Dean,</div>
+            <div class="salutation">{Salutation}</div>
             <p style="margin-bottom: 14px;">Greetings from <strong>SSSAM Academy, Gurugram</strong>.</p>
             <p style="margin-bottom: 14px;">We are writing to explore a <strong>Campus Placement & Industry Hiring Partnership</strong> with your college.</p>
             <div class="callout-box">
@@ -237,7 +239,7 @@ const QUICK_BRIEFING_TEMPLATE = `<!DOCTYPE html>
             <div style="font-weight: 700; font-size: 18px; color: #1e3a8a; margin-top: 6px;">SSSAM ACADEMY</div>
             <div style="font-size: 12px; color: #64748b;">Smart Solutions School of AI & Machine Learning</div>
         </div>
-        <p>Dear Sir/Madam,</p>
+        <p>{Salutation}</p>
         <p>On behalf of <strong>SSSAM Academy, Sector 14, Gurugram</strong>, I would like to propose a <strong>Free Hands-on Technical Seminar</strong> for your students.</p>
         <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 16px; margin: 16px 0; font-size: 13px;">
             <strong>Duration:</strong> 90 to 120 Minutes (Interactive Demo + Student Q&A)<br>
@@ -261,31 +263,40 @@ const TEMPLATES_LIST = [
     id: 'official_sssam',
     name: '⭐ Official SSSAM College Workshop Proposal (Default)',
     subject: 'Proposal: College Technical Workshops & Career Seminars - SSSAM Academy',
-    html: OFFICIAL_SSSAM_TEMPLATE
+    defaultSender: 'placements@sssamacademy.com',
+    html: OFFICIAL_SSSAM_TEMPLATE,
+    defaultSalutation: 'Dear Sir/Madam,'
   },
   {
     id: 'corporate_hiring',
     name: '🏢 Corporate HR Talent Hiring Pitch (Company Outreach)',
     subject: 'Proposal: IT Talent Sourcing & Campus Recruitment Partnership - SSSAM Academy',
-    html: CORPORATE_HIRING_TEMPLATE
+    defaultSender: 'hr@sssamacademy.com',
+    html: CORPORATE_HIRING_TEMPLATE,
+    defaultSalutation: 'Dear HR Manager / Talent Acquisition Team,'
   },
   {
     id: 'placement_drive',
     name: '💼 Campus Placement & Talent Sourcing Partnership',
     subject: 'Campus Placement Collaboration: SSSAM Academy IT Talent Drive',
-    html: PLACEMENT_DRIVE_TEMPLATE
+    defaultSender: 'placements@sssamacademy.com',
+    html: PLACEMENT_DRIVE_TEMPLATE,
+    defaultSalutation: 'Dear Head of Training & Placement / Dean,'
   },
   {
     id: 'quick_briefing',
     name: '⚡ Quick Executive Seminar Briefing (Direct & Short)',
     subject: 'Invitation: Free Technical Seminar for College Students - SSSAM Academy',
-    html: QUICK_BRIEFING_TEMPLATE
+    defaultSender: 'placements@sssamacademy.com',
+    html: QUICK_BRIEFING_TEMPLATE,
+    defaultSalutation: 'Dear Sir/Madam,'
   }
 ];
 
 export default function Dashboard() {
   const [selectedTemplateId, setSelectedTemplateId] = useState('official_sssam');
   const [subject, setSubject] = useState(TEMPLATES_LIST[0].subject);
+  const [senderEmail, setSenderEmail] = useState('placements@sssamacademy.com');
   const [htmlContent, setHtmlContent] = useState(OFFICIAL_SSSAM_TEMPLATE);
   const [showPreview, setShowPreview] = useState(false);
 
@@ -319,6 +330,7 @@ export default function Dashboard() {
     if (selected) {
       setHtmlContent(selected.html);
       setSubject(selected.subject);
+      setSenderEmail(selected.defaultSender);
       addLog(`Template selected: ${selected.name}`, 'green');
     }
   };
@@ -340,7 +352,7 @@ export default function Dashboard() {
     const newRecipient = {
       id: Date.now() + Math.random(),
       email: trimmedEmail,
-      name: manualName.trim() || trimmedEmail.split('@')[0],
+      name: manualName.trim() || '',
       status: 'Pending ⏳',
       reason: '-',
       time: '-',
@@ -369,10 +381,10 @@ export default function Dashboard() {
   // Load Sample CSV
   const handleLoadSample = () => {
     const sampleData = [
-      { email: 'tpo@dtu.ac.in', name: 'Delhi Technological University' },
+      { email: 'tpo@dtu.ac.in', name: 'Dr. Sharma (Delhi Technological University)' },
       { email: 'placements@gurugramuniversity.ac.in', name: 'Gurugram University' },
-      { email: 'tpo@amity.edu', name: 'Amity University' },
-      { email: 'invalid-email-sample', name: 'Sample Invalid Row' }
+      { email: 'hr@wipro.com', name: 'Wipro Hiring Team' },
+      { email: 'tpo@amity.edu', name: '' }
     ];
     setRecipients(
       sampleData.map((r, i) => ({
@@ -385,7 +397,7 @@ export default function Dashboard() {
         messageId: '-'
       }))
     );
-    addLog('Loaded 4 sample college emails.', 'green');
+    addLog('Loaded 4 sample emails (with and without custom names).', 'green');
   };
 
   // Handle CSV File Upload
@@ -400,11 +412,12 @@ export default function Dashboard() {
         const parsed = [];
         results.data.forEach((row, index) => {
           const emailVal = row.email || row.Email || row.EMAIL || Object.values(row).find((v) => v && v.includes('@'));
+          const nameVal = row.College_Name || row.Name || row.Contact_Person || row.TPO_Name || row.Company || '';
           if (emailVal) {
             parsed.push({
               id: index,
               email: emailVal.trim(),
-              name: row.College_Name || row.Name || row.Contact_Person || emailVal.split('@')[0],
+              name: nameVal ? nameVal.trim() : '',
               status: 'Pending ⏳',
               reason: '-',
               time: '-',
@@ -415,7 +428,7 @@ export default function Dashboard() {
 
         if (parsed.length > 0) {
           setRecipients((prev) => [...parsed, ...prev]);
-          addLog(`Loaded ${parsed.length} college emails from ${file.name}`, 'green');
+          addLog(`Loaded ${parsed.length} emails from ${file.name}`, 'green');
         } else {
           alert('No valid emails found in CSV. Please ensure your CSV has an "Email" column.');
         }
@@ -429,22 +442,44 @@ export default function Dashboard() {
     setLogs((prev) => [{ id: Date.now() + Math.random(), msg: `[${time}] ${msg}`, type }, ...prev]);
   };
 
+  // Compute Smart Fallback Salutation
+  const getSmartSalutation = (recName) => {
+    const currentTemplate = TEMPLATES_LIST.find((t) => t.id === selectedTemplateId);
+    const defaultFallback = currentTemplate?.defaultSalutation || 'Dear Sir/Madam,';
+
+    if (!recName || recName.trim() === '' || recName.includes('@')) {
+      return defaultFallback;
+    }
+
+    const cleanName = recName.trim();
+    if (cleanName.toLowerCase().startsWith('dear')) {
+      return cleanName.endsWith(',') ? cleanName : `${cleanName},`;
+    }
+    return `Dear ${cleanName},`;
+  };
+
+  // Render Template with Smart Salutation
+  const renderTemplateForRecipient = (rec) => {
+    const salutation = getSmartSalutation(rec?.name);
+    return htmlContent.replace(/{Salutation}/g, salutation);
+  };
+
   // Live Iframe Renderer (if preview toggled)
   useEffect(() => {
     if (showPreview && iframeRef.current) {
       const doc = iframeRef.current.contentDocument;
       if (doc) {
         doc.open();
-        doc.write(htmlContent.replace(/{Email}/g, recipients[0]?.email || 'college@edu.in'));
+        doc.write(renderTemplateForRecipient(recipients[0]));
         doc.close();
       }
     }
-  }, [htmlContent, recipients, showPreview]);
+  }, [htmlContent, recipients, showPreview, selectedTemplateId]);
 
   // Send Email Helper Function
   const sendSingleEmail = async (rec) => {
     const timestamp = new Date().toLocaleTimeString();
-    const renderedHtml = htmlContent.replace(/{Email}/g, rec.email);
+    const renderedHtml = renderTemplateForRecipient(rec);
 
     setRecipients((prev) =>
       prev.map((item) => (item.id === rec.id ? { ...item, status: 'Sending...' } : item))
@@ -455,8 +490,9 @@ export default function Dashboard() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          senderEmail,
           recipientEmail: rec.email,
-          recipientName: rec.name,
+          recipientName: rec.name || rec.email,
           subject,
           htmlContent: renderedHtml
         })
@@ -478,7 +514,7 @@ export default function Dashboard() {
               : item
           )
         );
-        addLog(`Sent to ${rec.email}`, 'green');
+        addLog(`Sent to ${rec.email} (from ${senderEmail})`, 'green');
         return true;
       } else {
         const failureReason = data.error || 'Failed to send via Brevo.';
@@ -554,7 +590,7 @@ export default function Dashboard() {
     if (recipients.length === 0) return;
     const exportData = recipients.map((r) => ({
       Email: r.email,
-      College_Name: r.name,
+      Recipient_Name: r.name,
       Status: r.status,
       Failure_Reason: r.reason,
       Message_ID: r.messageId,
@@ -623,8 +659,30 @@ export default function Dashboard() {
         <div>
           {/* Card 1: Select Template & Add Recipients */}
           <div className="card">
-            <h2 className="card-title">📂 1. Select Template & Add Recipients</h2>
+            <h2 className="card-title">📂 1. Select Template & Sender</h2>
             
+            {/* Sender Email Switcher */}
+            <div className="form-group">
+              <label>Sending From (Sender Email)</label>
+              <select
+                value={senderEmail}
+                onChange={(e) => setSenderEmail(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  background: 'rgba(15, 23, 42, 0.9)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  borderRadius: '8px',
+                  color: '#34d399',
+                  fontWeight: '600',
+                  fontSize: '13px'
+                }}
+              >
+                <option value="placements@sssamacademy.com">🎓 SSSAM Placement Cell (placements@sssamacademy.com)</option>
+                <option value="hr@sssamacademy.com">🏢 SSSAM HR Team (hr@sssamacademy.com)</option>
+              </select>
+            </div>
+
             <div className="form-group">
               <label>Choose Email Template</label>
               <select
@@ -683,10 +741,10 @@ export default function Dashboard() {
                   />
                 </div>
                 <div className="form-group" style={{ marginBottom: '10px' }}>
-                  <label>Company / Recipient Name (Optional)</label>
+                  <label>Recipient / TPO / Company Name (Optional)</label>
                   <input
                     type="text"
-                    placeholder="Wipro / Delhi Tech University"
+                    placeholder="Dr. Sharma / Wipro Hiring Team (Optional)"
                     value={manualName}
                     onChange={(e) => setManualName(e.target.value)}
                   />
@@ -701,7 +759,7 @@ export default function Dashboard() {
             {inputMode === 'csv' && (
               <div className="dropzone">
                 <p style={{ fontSize: '14px', fontWeight: '600' }}>Drop CSV File Here</p>
-                <p style={{ fontSize: '12px', color: '#94a3b8', margin: '4px 0 10px' }}>Requires an "Email" column</p>
+                <p style={{ fontSize: '12px', color: '#94a3b8', margin: '4px 0 10px' }}>Requires an "Email" column (Name/Company optional)</p>
                 <input type="file" accept=".csv" onChange={handleFileUpload} />
               </div>
             )}
@@ -820,6 +878,7 @@ export default function Dashboard() {
                   <tr>
                     <th>#</th>
                     <th>Email Address</th>
+                    <th>Name / Details</th>
                     <th>Status</th>
                     <th>Reason / Error Diagnostic</th>
                     <th>Action</th>
@@ -828,7 +887,7 @@ export default function Dashboard() {
                 <tbody>
                   {filteredRecipients.length === 0 ? (
                     <tr>
-                      <td colSpan="5" style={{ textAlign: 'center', padding: '20px', color: '#94a3b8' }}>
+                      <td colSpan="6" style={{ textAlign: 'center', padding: '20px', color: '#94a3b8' }}>
                         No records in list. Upload a CSV or add an email address manually above.
                       </td>
                     </tr>
@@ -837,6 +896,7 @@ export default function Dashboard() {
                       <tr key={rec.id}>
                         <td>{i + 1}</td>
                         <td style={{ fontWeight: '600' }}>{rec.email}</td>
+                        <td style={{ fontSize: '12px', color: '#cbd5e1' }}>{rec.name || '-'}</td>
                         <td>
                           <span
                             className={`badge ${
