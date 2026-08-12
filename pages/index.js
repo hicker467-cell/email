@@ -217,7 +217,7 @@ export default function Dashboard() {
   const [showPreview, setShowPreview] = useState(false);
 
   // Dual Recipient Mode: 'csv' vs 'single'
-  const [inputMode, setInputMode] = useState('csv');
+  const [inputMode, setInputMode] = useState('single');
   const [manualEmail, setManualEmail] = useState('');
   const [manualName, setManualName] = useState('');
 
@@ -259,7 +259,6 @@ export default function Dashboard() {
     }
 
     const trimmedEmail = manualEmail.trim();
-    // Check if email already exists in table
     if (recipients.some((r) => r.email.toLowerCase() === trimmedEmail.toLowerCase())) {
       alert(`Email ${trimmedEmail} is already in the list!`);
       return;
@@ -278,7 +277,7 @@ export default function Dashboard() {
     setRecipients((prev) => [newRecipient, ...prev]);
     setManualEmail('');
     setManualName('');
-    addLog(`Added recipient manually: ${trimmedEmail}`, 'green');
+    addLog(`Added recipient: ${trimmedEmail}`, 'green');
   };
 
   // Remove individual recipient
@@ -342,7 +341,7 @@ export default function Dashboard() {
         });
 
         if (parsed.length > 0) {
-          setRecipients(parsed);
+          setRecipients((prev) => [...parsed, ...prev]);
           addLog(`Loaded ${parsed.length} college emails from ${file.name}`, 'green');
         } else {
           alert('No valid emails found in CSV. Please ensure your CSV has an "Email" column.');
@@ -373,6 +372,11 @@ export default function Dashboard() {
   const sendSingleEmail = async (rec) => {
     const timestamp = new Date().toLocaleTimeString();
     const renderedHtml = htmlContent.replace(/{Email}/g, rec.email);
+
+    // Update row status to sending...
+    setRecipients((prev) =>
+      prev.map((item) => (item.id === rec.id ? { ...item, status: 'Sending...' } : item))
+    );
 
     try {
       const res = await fetch('/api/send-email', {
@@ -455,10 +459,6 @@ export default function Dashboard() {
 
     for (let i = 0; i < listToProcess.length; i++) {
       const rec = listToProcess[i];
-      setRecipients((prev) =>
-        prev.map((item) => (item.id === rec.id ? { ...item, status: 'Sending...' } : item))
-      );
-
       await sendSingleEmail(rec);
       await new Promise((r) => setTimeout(r, 150));
     }
@@ -573,32 +573,23 @@ export default function Dashboard() {
             <div style={{ display: 'flex', gap: '6px', margin: '14px 0 10px' }}>
               <button
                 type="button"
-                onClick={() => setInputMode('csv')}
-                className={`btn ${inputMode === 'csv' ? 'btn-primary' : 'btn-outline'}`}
-                style={{ flex: 1, fontSize: '12px', padding: '6px' }}
-              >
-                📁 Upload CSV File
-              </button>
-              <button
-                type="button"
                 onClick={() => setInputMode('single')}
                 className={`btn ${inputMode === 'single' ? 'btn-primary' : 'btn-outline'}`}
                 style={{ flex: 1, fontSize: '12px', padding: '6px' }}
               >
                 ✉️ Add Single Email
               </button>
+              <button
+                type="button"
+                onClick={() => setInputMode('csv')}
+                className={`btn ${inputMode === 'csv' ? 'btn-primary' : 'btn-outline'}`}
+                style={{ flex: 1, fontSize: '12px', padding: '6px' }}
+              >
+                📁 Upload CSV File
+              </button>
             </div>
 
-            {/* Mode A: CSV Dropzone */}
-            {inputMode === 'csv' && (
-              <div className="dropzone">
-                <p style={{ fontSize: '14px', fontWeight: '600' }}>Drop College CSV File Here</p>
-                <p style={{ fontSize: '12px', color: '#94a3b8', margin: '4px 0 10px' }}>Requires an "Email" column</p>
-                <input type="file" accept=".csv" onChange={handleFileUpload} />
-              </div>
-            )}
-
-            {/* Mode B: Manual Single / One-by-One Email Input */}
+            {/* Mode A: Manual Single / One-by-One Email Input */}
             {inputMode === 'single' && (
               <form onSubmit={handleAddManualEmail} style={{ background: 'rgba(15,23,42,0.5)', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)' }}>
                 <div className="form-group" style={{ marginBottom: '8px' }}>
@@ -625,6 +616,15 @@ export default function Dashboard() {
                 </button>
               </form>
             )}
+
+            {/* Mode B: CSV Dropzone */}
+            {inputMode === 'csv' && (
+              <div className="dropzone">
+                <p style={{ fontSize: '14px', fontWeight: '600' }}>Drop College CSV File Here</p>
+                <p style={{ fontSize: '12px', color: '#94a3b8', margin: '4px 0 10px' }}>Requires an "Email" column</p>
+                <input type="file" accept=".csv" onChange={handleFileUpload} />
+              </div>
+            )}
           </div>
 
           {/* Card 2: Dispatch Controller & Execution Logs */}
@@ -646,7 +646,7 @@ export default function Dashboard() {
                 className="btn btn-success"
                 style={{ flex: 1, padding: '14px', fontSize: '15px' }}
               >
-                {isSending ? 'Sending Emails...' : `Send to ${recipients.length} Colleges`}
+                {isSending ? 'Sending Emails...' : `🚀 Send All (${recipients.length})`}
               </button>
 
               {failedCount > 0 && (
@@ -774,13 +774,26 @@ export default function Dashboard() {
                           style={{
                             fontSize: '12px',
                             color: rec.status.includes('Failed') ? '#f87171' : '#94a3b8',
-                            maxWidth: '200px',
+                            maxWidth: '180px',
                             wordBreak: 'break-word'
                           }}
                         >
                           {rec.reason}
                         </td>
-                        <td>
+                        <td style={{ whiteSpace: 'nowrap' }}>
+                          <button
+                            onClick={() => sendSingleEmail(rec)}
+                            disabled={isSending || rec.status.includes('Sending')}
+                            className="btn btn-success"
+                            style={{
+                              padding: '4px 10px',
+                              fontSize: '11px',
+                              marginRight: '6px'
+                            }}
+                            title="Send email to this recipient now"
+                          >
+                            🚀 Send
+                          </button>
                           <button
                             onClick={() => handleRemoveRecipient(rec.id)}
                             style={{
