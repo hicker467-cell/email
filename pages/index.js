@@ -39,7 +39,7 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
     <div class="email-card">
         <div class="header-logo">
             <div class="logo-circle">
-                <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto;" />
+                <img src="https://sssam-email.vercel.app/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto;" />
             </div>
             <div class="brand-title">SSSAM Academy</div>
             <div class="brand-sub">Smart Solutions School of AI & Machine Learning</div>
@@ -122,7 +122,7 @@ const CORPORATE_HIRING_TEMPLATE = `<!DOCTYPE html>
     <div class="email-card">
         <div class="header-logo">
             <div class="logo-circle">
-                <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto;" />
+                <img src="https://sssam-email.vercel.app/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto;" />
             </div>
             <div class="brand-title">SSSAM Academy</div>
             <div class="brand-sub">Corporate Talent Sourcing & HR Hiring Partner</div>
@@ -190,7 +190,7 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
     <div class="email-card">
         <div class="header-logo">
             <div class="logo-circle">
-                <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto;" />
+                <img src="https://sssam-email.vercel.app/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto;" />
             </div>
             <div class="brand-title">SSSAM Academy</div>
             <div class="brand-sub">Campus Placement & Industry Hiring Partnership</div>
@@ -234,7 +234,7 @@ const QUICK_BRIEFING_TEMPLATE = `<!DOCTYPE html>
 <body>
     <div class="email-card">
         <div style="text-align: center; margin-bottom: 20px;">
-            <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 75px; height: auto;" />
+            <img src="https://sssam-email.vercel.app/logo.png" alt="SSSAM Academy Logo" style="max-width: 75px; height: auto;" />
             <div style="font-weight: 700; font-size: 18px; color: #1e3a8a; margin-top: 6px;">SSSAM ACADEMY</div>
             <div style="font-size: 12px; color: #64748b;">Smart Solutions School of AI & Machine Learning</div>
         </div>
