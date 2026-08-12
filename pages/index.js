@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Papa from 'papaparse';
 
+// Template 1: ⭐ Official SSSAM College Workshop Proposal (MUST NOT BE ALTERED)
 const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
 <html>
 <head>
@@ -126,11 +127,141 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
 </body>
 </html>`;
 
+// Template 2: 💼 Campus Placement & Talent Sourcing Collaboration
+const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #2d3748; background-color: #f7fafc; margin: 0; padding: 20px; }
+        .email-card { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
+        .header-logo { text-align: center; padding: 30px 20px 15px; }
+        .brand-title { font-size: 20px; font-weight: 700; color: #1a202c; margin: 0; }
+        .brand-sub { font-size: 12px; color: #0f766e; font-weight: 600; margin: 3px 0 10px; }
+        .blue-divider { width: 40px; height: 3px; background-color: #0f766e; margin: 0 auto; border-radius: 2px; }
+        
+        .body-content { padding: 25px 35px 30px; font-size: 14px; color: #334155; }
+        .callout-box { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 14px 18px; margin: 18px 0; border-radius: 0 6px 6px 0; }
+        .btn-wrapper { text-align: center; margin: 24px 0 16px; }
+        .btn-green { background-color: #0f766e; color: #ffffff !important; padding: 12px 26px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 13px; display: inline-block; }
+        
+        .sign-off { margin-top: 25px; border-top: 1px solid #f1f5f9; padding-top: 15px; font-size: 13px; color: #475569; }
+        .footer-bar { background-color: #f8fafc; border-top: 1px solid #f1f5f9; padding: 12px; text-align: center; font-size: 11px; color: #94a3b8; }
+    </style>
+</head>
+<body>
+    <div class="email-card">
+        <div class="header-logo">
+            <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto; margin-bottom: 8px;" />
+            <div class="brand-title">SSSAM Academy</div>
+            <div class="brand-sub">Campus Placement & Industry Hiring Partnership</div>
+            <div class="blue-divider"></div>
+        </div>
+
+        <div class="body-content">
+            <div style="font-size: 14px; margin-bottom: 14px;">Dear Head of Training & Placement / Dean,</div>
+            
+            <p style="margin-bottom: 14px;">Greetings from <strong>SSSAM Academy, Gurugram</strong>.</p>
+            
+            <p style="margin-bottom: 14px;">We are writing to explore a <strong>Campus Placement & Industry Hiring Partnership</strong> with your esteemed college to provide your graduating students with direct career opportunities in top IT firms.</p>
+
+            <div class="callout-box">
+                <div style="font-weight: 700; color: #166534; font-size: 15px;">Placement Sourcing & Recruitment Drives</div>
+                <div style="font-size: 13px; color: #15803d; margin-top: 4px;">• On-Campus & Virtual Recruitment Drives<br>• Pre-Placement Technical Assessment<br>• Resume Building & Technical Mock Interviews</div>
+            </div>
+
+            <p style="margin-bottom: 14px;">Our students and partner candidates undergo rigorous training in <strong>Full-Stack, Data Science, AI/ML, Cyber Security, and Cloud Computing</strong>, making them job-ready for modern corporate needs.</p>
+
+            <div class="btn-wrapper">
+                <a href="https://www.sssamacademy.com/college-training.html" target="_blank" class="btn-green">Explore Placement Partnership &rarr;</a>
+            </div>
+
+            <div class="sign-off">
+                <div>Warm Regards,</div>
+                <div style="font-weight: 700; color: #0f172a; font-size: 14px; margin: 2px 0;">Training & Placement Cell</div>
+                <div style="font-size: 12px; color: #64748b;">SSSAM Academy, Gurugram</div>
+                <div style="font-size: 12px; color: #64748b; margin-top: 6px;">📞 +91 9102130958 | 📧 placements@sssamacademy.com | 🌐 www.sssamacademy.com</div>
+            </div>
+        </div>
+
+        <div class="footer-bar">
+            SSSAM Academy | Gurugram
+        </div>
+    </div>
+</body>
+</html>`;
+
+// Template 3: ⚡ Executive Direct Seminar Briefing
+const QUICK_BRIEFING_TEMPLATE = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.5; color: #2d3748; background-color: #f7fafc; margin: 0; padding: 20px; }
+        .email-card { max-width: 580px; margin: 0 auto; background: #ffffff; border-radius: 8px; border: 1px solid #e2e8f0; padding: 30px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .btn-blue { background-color: #2563eb; color: #ffffff !important; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 13px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="email-card">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 75px; height: auto;" />
+            <div style="font-weight: 700; font-size: 18px; color: #1e3a8a; margin-top: 6px;">SSSAM ACADEMY</div>
+            <div style="font-size: 12px; color: #64748b;">Smart Solutions School of AI & Machine Learning</div>
+        </div>
+
+        <p>Dear Sir/Madam,</p>
+        
+        <p>On behalf of <strong>SSSAM Academy, Sector 14, Gurugram</strong>, I would like to propose a <strong>Free Hands-on Technical Seminar</strong> for your students on emerging technologies including <strong>AI/ML, Full-Stack Web Development, Cybersecurity, and Cloud Computing</strong>.</p>
+        
+        <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 16px; margin: 16px 0; font-size: 13px;">
+            <strong>Duration:</strong> 90 to 120 Minutes (Interactive Demo + Student Q&A)<br>
+            <strong>Cost:</strong> Free of Training Charges for Partner Colleges
+        </div>
+
+        <p>Could you please connect us with your TPO / HOD / Coordinator to schedule a suitable date?</p>
+
+        <div style="text-align: center; margin: 20px 0;">
+            <a href="https://www.sssamacademy.com/college-training.html" target="_blank" class="btn-blue">View Seminar Details &rarr;</a>
+        </div>
+
+        <p style="margin-top: 25px; border-top: 1px solid #f1f5f9; padding-top: 15px; font-size: 13px; color: #475569;">
+            Warm Regards,<br>
+            <strong>Institutional Outreach Team</strong><br>
+            SSSAM Academy, Sector 14, Gurugram<br>
+            📞 9102130958 | 📧 placements@sssamacademy.com | 🌐 www.sssamacademy.com
+        </p>
+    </div>
+</body>
+</html>`;
+
+const TEMPLATES_LIST = [
+  {
+    id: 'official_sssam',
+    name: '⭐ Official SSSAM College Workshop Proposal (Default)',
+    subject: 'Proposal: College Technical Workshops & Career Seminars - SSSAM Academy',
+    html: OFFICIAL_SSSAM_TEMPLATE
+  },
+  {
+    id: 'placement_drive',
+    name: '💼 Campus Placement & Talent Sourcing Partnership',
+    subject: 'Campus Placement Collaboration: SSSAM Academy IT Talent Drive',
+    html: PLACEMENT_DRIVE_TEMPLATE
+  },
+  {
+    id: 'quick_briefing',
+    name: '⚡ Quick Executive Seminar Briefing (Direct & Short)',
+    subject: 'Invitation: Free Technical Seminar for College Students - SSSAM Academy',
+    html: QUICK_BRIEFING_TEMPLATE
+  }
+];
+
 export default function Dashboard() {
+  const [selectedTemplateId, setSelectedTemplateId] = useState('official_sssam');
   const [apiKey, setApiKey] = useState('');
   const [senderName, setSenderName] = useState('SSSAM Academy');
   const [senderEmail, setSenderEmail] = useState('placements@sssamacademy.com');
-  const [subject, setSubject] = useState('Proposal: College Technical Workshops & Career Seminars - SSSAM Academy');
+  const [subject, setSubject] = useState(TEMPLATES_LIST[0].subject);
   const [htmlContent, setHtmlContent] = useState(OFFICIAL_SSSAM_TEMPLATE);
 
   const [recipients, setRecipients] = useState([]);
@@ -156,6 +287,17 @@ export default function Dashboard() {
       })
       .catch((err) => console.log('Env config load note:', err));
   }, []);
+
+  // Handle Template Selector Change
+  const handleTemplateChange = (templateId) => {
+    setSelectedTemplateId(templateId);
+    const selected = TEMPLATES_LIST.find((t) => t.id === templateId);
+    if (selected) {
+      setHtmlContent(selected.html);
+      setSubject(selected.subject);
+      addLog(`Selected Template: ${selected.name}`, 'green');
+    }
+  };
 
   // Load sample CSV
   const handleLoadSample = () => {
@@ -461,10 +603,35 @@ export default function Dashboard() {
             {statusMsg && <p style={{ fontSize: '12px', marginTop: '8px', color: '#94a3b8' }}>{statusMsg}</p>}
           </div>
 
-          {/* Card 2: CSV Upload */}
+          {/* Card 2: CSV Upload & Template Switcher */}
           <div className="card">
-            <h2 className="card-title">📊 2. Upload College CSV List</h2>
-            <div className="dropzone">
+            <h2 className="card-title">🎨 2. Choose Template & Upload CSV</h2>
+            
+            <div className="form-group">
+              <label>Select Email Template</label>
+              <select
+                value={selectedTemplateId}
+                onChange={(e) => handleTemplateChange(e.target.value)}
+                style={{
+                  width: '100%',
+                  padding: '10px 12px',
+                  background: 'rgba(15, 23, 42, 0.9)',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  borderRadius: '8px',
+                  color: '#38bdf8',
+                  fontWeight: '600',
+                  fontSize: '13px'
+                }}
+              >
+                {TEMPLATES_LIST.map((t) => (
+                  <option key={t.id} value={t.id}>
+                    {t.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="dropzone" style={{ marginTop: '12px' }}>
               <p style={{ fontSize: '14px', fontWeight: '600' }}>Drop College CSV File Here</p>
               <p style={{ fontSize: '12px', color: '#94a3b8', margin: '4px 0 10px' }}>Requires an "Email" column</p>
               <input type="file" accept=".csv" onChange={handleFileUpload} />
@@ -573,7 +740,7 @@ export default function Dashboard() {
             </div>
 
             {/* Delivery Table */}
-            <div className="table-wrap" style={{ maxHeight: '280px' }}>
+            <div className="table-wrap" style={{ maxHeight: '250px' }}>
               <table>
                 <thead>
                   <tr>
@@ -630,7 +797,7 @@ export default function Dashboard() {
 
           {/* HTML Preview */}
           <div className="card">
-            <h2 className="card-title">👁️ Official SSSAM Academy Template Preview</h2>
+            <h2 className="card-title">👁️ Live Email Template Preview</h2>
             <iframe ref={iframeRef} className="iframe-box" style={{ height: '480px' }} title="Email Render Preview" />
           </div>
         </div>
