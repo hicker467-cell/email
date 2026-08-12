@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Papa from 'papaparse';
 
-// Template 1: ⭐ Official SSSAM College Workshop Proposal (MUST NOT BE ALTERED)
+// Template 1: ⭐ Official SSSAM College Workshop Proposal (Default)
 const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +42,6 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
 </head>
 <body>
     <div class="email-card">
-        <!-- Logo & Header -->
         <div class="header-logo">
             <div class="logo-circle">
                 <img src="/logo.png" alt="SSSAM Academy Logo" style="max-width: 85px; height: auto;" />
@@ -52,19 +51,11 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
             <div class="blue-divider"></div>
         </div>
 
-        <!-- Body Content -->
         <div class="body-content">
             <div class="salutation">Dear Sir/Madam,</div>
-            
             <div class="para">Greetings from <strong>SSSAM Academy, Gurugram</strong>.</div>
-            
-            <div class="para">
-                <strong>SSSAM Academy</strong> conducts <strong>technical seminars, guest lectures, hands-on workshops and industry-oriented training programs</strong> for college students.
-            </div>
-            
-            <div class="para">
-                We would like to explore a collaboration with your institution for conducting a suitable technical session for your students.
-            </div>
+            <div class="para"><strong>SSSAM Academy</strong> conducts <strong>technical seminars, guest lectures, hands-on workshops and industry-oriented training programs</strong> for college students.</div>
+            <div class="para">We would like to explore a collaboration with your institution for conducting a suitable technical session for your students.</div>
 
             <div class="section-title">Key Areas</div>
             <div class="tech-list">
@@ -74,7 +65,6 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
                 <strong>CCNA & CCNP</strong> &nbsp;•&nbsp; <strong>AWS, Cloud & DevOps</strong>
             </div>
 
-            <!-- Callout Box -->
             <div class="callout-box">
                 <div class="callout-title">One-Day Technical Workshop</div>
                 <div class="callout-badge">FREE OF TRAINING CHARGES</div>
@@ -82,35 +72,22 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
             </div>
 
             <div class="section-title">We also offer</div>
-            <div style="font-size: 13px; color: #475569; margin-bottom: 14px;">
-                Technical Seminars &nbsp;•&nbsp; Guest Lectures &nbsp;•&nbsp; Hands-on Workshops &nbsp;•&nbsp; Industrial Training &nbsp;•&nbsp; Project-Based Training
-            </div>
+            <div style="font-size: 13px; color: #475569; margin-bottom: 14px;">Technical Seminars &nbsp;•&nbsp; Guest Lectures &nbsp;•&nbsp; Hands-on Workshops &nbsp;•&nbsp; Industrial Training &nbsp;•&nbsp; Project-Based Training</div>
+            <div class="para">Sessions can be customized according to the <strong>department, student level, preferred topic and academic schedule</strong>.</div>
 
-            <div class="para">
-                Sessions can be customized according to the <strong>department, student level, preferred topic and academic schedule</strong>.
-            </div>
-
-            <!-- CTA Buttons -->
             <div class="btn-wrapper">
                 <a href="https://www.sssamacademy.com/college-training.html" target="_blank" class="btn-blue">Explore College Training & Seminars &rarr;</a>
                 <a href="https://www.sssamacademy.com/gallery.html" target="_blank" class="sub-link">View Recent Seminar Activities &rarr;</a>
             </div>
 
-            <div class="para" style="margin-top: 20px;">
-                We would be happy to discuss a suitable topic and format for your students.
-            </div>
+            <div class="para" style="margin-top: 20px;">We would be happy to discuss a suitable topic and format for your students.</div>
+            <div class="para">Kindly let us know the concerned <strong>TPO / HOD / Coordinator</strong> with whom we may connect.</div>
 
-            <div class="para">
-                Kindly let us know the concerned <strong>TPO / HOD / Coordinator</strong> with whom we may connect.
-            </div>
-
-            <!-- Sign-off -->
             <div class="sign-off">
                 <div>Warm Regards,</div>
                 <div class="company-title">SSSAM Academy</div>
                 <div style="font-size: 12px; color: #64748b;">Smart Solutions School of AI & Machine Learning</div>
                 <div style="font-size: 12px; color: #64748b;">Gurugram, Haryana</div>
-                
                 <div class="contact-info">
                     <strong>Phone:</strong> 9102130958<br>
                     <strong>Email:</strong> <a href="mailto:placements@sssamacademy.com">placements@sssamacademy.com</a><br>
@@ -118,16 +95,12 @@ const OFFICIAL_SSSAM_TEMPLATE = `<!DOCTYPE html>
                 </div>
             </div>
         </div>
-
-        <!-- Footer -->
-        <div class="footer-bar">
-            SSSAM Academy | Gurugram
-        </div>
+        <div class="footer-bar">SSSAM Academy | Gurugram</div>
     </div>
 </body>
 </html>`;
 
-// Template 2: 💼 Campus Placement & Talent Sourcing Collaboration
+// Template 2: 💼 Campus Placement & Talent Sourcing
 const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
 <html>
 <head>
@@ -139,12 +112,10 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
         .brand-title { font-size: 20px; font-weight: 700; color: #1a202c; margin: 0; }
         .brand-sub { font-size: 12px; color: #0f766e; font-weight: 600; margin: 3px 0 10px; }
         .blue-divider { width: 40px; height: 3px; background-color: #0f766e; margin: 0 auto; border-radius: 2px; }
-        
         .body-content { padding: 25px 35px 30px; font-size: 14px; color: #334155; }
         .callout-box { background: #f0fdf4; border-left: 4px solid #16a34a; padding: 14px 18px; margin: 18px 0; border-radius: 0 6px 6px 0; }
         .btn-wrapper { text-align: center; margin: 24px 0 16px; }
         .btn-green { background-color: #0f766e; color: #ffffff !important; padding: 12px 26px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 13px; display: inline-block; }
-        
         .sign-off { margin-top: 25px; border-top: 1px solid #f1f5f9; padding-top: 15px; font-size: 13px; color: #475569; }
         .footer-bar { background-color: #f8fafc; border-top: 1px solid #f1f5f9; padding: 12px; text-align: center; font-size: 11px; color: #94a3b8; }
     </style>
@@ -160,17 +131,15 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
 
         <div class="body-content">
             <div style="font-size: 14px; margin-bottom: 14px;">Dear Head of Training & Placement / Dean,</div>
-            
             <p style="margin-bottom: 14px;">Greetings from <strong>SSSAM Academy, Gurugram</strong>.</p>
-            
-            <p style="margin-bottom: 14px;">We are writing to explore a <strong>Campus Placement & Industry Hiring Partnership</strong> with your esteemed college to provide your graduating students with direct career opportunities in top IT firms.</p>
+            <p style="margin-bottom: 14px;">We are writing to explore a <strong>Campus Placement & Industry Hiring Partnership</strong> with your college to provide students with direct career opportunities in top IT firms.</p>
 
             <div class="callout-box">
                 <div style="font-weight: 700; color: #166534; font-size: 15px;">Placement Sourcing & Recruitment Drives</div>
                 <div style="font-size: 13px; color: #15803d; margin-top: 4px;">• On-Campus & Virtual Recruitment Drives<br>• Pre-Placement Technical Assessment<br>• Resume Building & Technical Mock Interviews</div>
             </div>
 
-            <p style="margin-bottom: 14px;">Our students and partner candidates undergo rigorous training in <strong>Full-Stack, Data Science, AI/ML, Cyber Security, and Cloud Computing</strong>, making them job-ready for modern corporate needs.</p>
+            <p style="margin-bottom: 14px;">Our candidates undergo training in <strong>Full-Stack, Data Science, AI/ML, Cyber Security, and Cloud Computing</strong>.</p>
 
             <div class="btn-wrapper">
                 <a href="https://www.sssamacademy.com/college-training.html" target="_blank" class="btn-green">Explore Placement Partnership &rarr;</a>
@@ -183,10 +152,7 @@ const PLACEMENT_DRIVE_TEMPLATE = `<!DOCTYPE html>
                 <div style="font-size: 12px; color: #64748b; margin-top: 6px;">📞 +91 9102130958 | 📧 placements@sssamacademy.com | 🌐 www.sssamacademy.com</div>
             </div>
         </div>
-
-        <div class="footer-bar">
-            SSSAM Academy | Gurugram
-        </div>
+        <div class="footer-bar">SSSAM Academy | Gurugram</div>
     </div>
 </body>
 </html>`;
@@ -211,8 +177,7 @@ const QUICK_BRIEFING_TEMPLATE = `<!DOCTYPE html>
         </div>
 
         <p>Dear Sir/Madam,</p>
-        
-        <p>On behalf of <strong>SSSAM Academy, Sector 14, Gurugram</strong>, I would like to propose a <strong>Free Hands-on Technical Seminar</strong> for your students on emerging technologies including <strong>AI/ML, Full-Stack Web Development, Cybersecurity, and Cloud Computing</strong>.</p>
+        <p>On behalf of <strong>SSSAM Academy, Sector 14, Gurugram</strong>, I would like to propose a <strong>Free Hands-on Technical Seminar</strong> for your students on <strong>AI/ML, Full-Stack Development, Cybersecurity, and Cloud Computing</strong>.</p>
         
         <div style="background: #eff6ff; border-left: 4px solid #2563eb; padding: 12px 16px; margin: 16px 0; font-size: 13px;">
             <strong>Duration:</strong> 90 to 120 Minutes (Interactive Demo + Student Q&A)<br>
@@ -258,48 +223,40 @@ const TEMPLATES_LIST = [
 
 export default function Dashboard() {
   const [selectedTemplateId, setSelectedTemplateId] = useState('official_sssam');
-  const [apiKey, setApiKey] = useState('');
-  const [senderName, setSenderName] = useState('SSSAM Academy');
-  const [senderEmail, setSenderEmail] = useState('placements@sssamacademy.com');
   const [subject, setSubject] = useState(TEMPLATES_LIST[0].subject);
   const [htmlContent, setHtmlContent] = useState(OFFICIAL_SSSAM_TEMPLATE);
+  const [showPreview, setShowPreview] = useState(false);
 
   const [recipients, setRecipients] = useState([]);
   const [isSending, setIsSending] = useState(false);
   const [logs, setLogs] = useState([]);
-  const [statusMsg, setStatusMsg] = useState('');
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
   const iframeRef = useRef(null);
 
-  // Load Initial Config Defaults from Environment Route
+  // Load Initial Config Defaults from Environment
   useEffect(() => {
     fetch('/api/config')
       .then((res) => res.json())
       .then((cfg) => {
-        if (cfg.senderName) setSenderName(cfg.senderName);
-        if (cfg.senderEmail) setSenderEmail(cfg.senderEmail);
         if (cfg.defaultSubject) setSubject(cfg.defaultSubject);
-        if (cfg.hasEnvApiKey) {
-          addLog('Detected BREVO_API_KEY from Vercel environment variables.', 'green');
-        }
       })
       .catch((err) => console.log('Env config load note:', err));
   }, []);
 
-  // Handle Template Selector Change
+  // Handle Template Selection
   const handleTemplateChange = (templateId) => {
     setSelectedTemplateId(templateId);
     const selected = TEMPLATES_LIST.find((t) => t.id === templateId);
     if (selected) {
       setHtmlContent(selected.html);
       setSubject(selected.subject);
-      addLog(`Selected Template: ${selected.name}`, 'green');
+      addLog(`Template selected: ${selected.name}`, 'green');
     }
   };
 
-  // Load sample CSV
+  // Load Sample CSV
   const handleLoadSample = () => {
     const sampleData = [
       { email: 'tpo@dtu.ac.in', name: 'Delhi Technological University' },
@@ -318,10 +275,10 @@ export default function Dashboard() {
         messageId: '-'
       }))
     );
-    addLog('Loaded 4 sample college emails for testing.', 'green');
+    addLog('Loaded 4 sample college emails.', 'green');
   };
 
-  // Handle CSV Upload
+  // Handle CSV File Upload
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -362,31 +319,9 @@ export default function Dashboard() {
     setLogs((prev) => [{ id: Date.now() + Math.random(), msg: `[${time}] ${msg}`, type }, ...prev]);
   };
 
-  // Test Brevo Connection
-  const handleTestConnection = async () => {
-    setStatusMsg('Testing Brevo connection...');
-    try {
-      const res = await fetch('/api/test-brevo', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ apiKey })
-      });
-      const data = await res.json();
-      if (data.success) {
-        setStatusMsg(`✅ Connected! Brevo Account: ${data.account.email}`);
-        addLog(`Connected to Brevo Account (${data.account.email})`, 'green');
-      } else {
-        setStatusMsg(`❌ Connection Failed: ${data.error}`);
-        addLog(`Brevo connection failed: ${data.error}`, 'red');
-      }
-    } catch (err) {
-      setStatusMsg(`❌ Connection Error: ${err.message}`);
-    }
-  };
-
-  // Live Iframe Renderer
+  // Live Iframe Renderer (if preview toggled)
   useEffect(() => {
-    if (iframeRef.current) {
+    if (showPreview && iframeRef.current) {
       const doc = iframeRef.current.contentDocument;
       if (doc) {
         doc.open();
@@ -394,7 +329,7 @@ export default function Dashboard() {
         doc.close();
       }
     }
-  }, [htmlContent, recipients]);
+  }, [htmlContent, recipients, showPreview]);
 
   // Send Email Helper Function
   const sendSingleEmail = async (rec) => {
@@ -406,9 +341,6 @@ export default function Dashboard() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          apiKey,
-          senderName,
-          senderEmail,
           recipientEmail: rec.email,
           recipientName: rec.name,
           subject,
@@ -432,7 +364,7 @@ export default function Dashboard() {
               : item
           )
         );
-        addLog(`Sent to ${rec.email} (MsgID: ${data.messageId || 'OK'})`, 'green');
+        addLog(`Sent to ${rec.email}`, 'green');
         return true;
       } else {
         const failureReason = data.error || 'Failed to send via Brevo.';
@@ -476,12 +408,12 @@ export default function Dashboard() {
   const handleStartDispatch = async (targetList = null) => {
     const listToProcess = targetList || recipients;
     if (listToProcess.length === 0) {
-      alert('No recipients available to send.');
+      alert('No recipients available to send. Please upload a CSV file.');
       return;
     }
 
     setIsSending(true);
-    addLog(`🚀 Starting email dispatch for ${listToProcess.length} colleges...`, 'green');
+    addLog(`🚀 Dispatching emails to ${listToProcess.length} colleges...`, 'green');
 
     for (let i = 0; i < listToProcess.length; i++) {
       const rec = listToProcess[i];
@@ -494,7 +426,7 @@ export default function Dashboard() {
     }
 
     setIsSending(false);
-    addLog(`🏁 Dispatch process finished!`, 'green');
+    addLog(`🏁 Dispatch completed!`, 'green');
   };
 
   // Retry Failed Emails Only
@@ -553,11 +485,14 @@ export default function Dashboard() {
       <div className="header">
         <div className="brand">
           <h1>SSSAM ACADEMY</h1>
-          <p>Smart Solutions School of AI & Machine Learning — Bulk Email Dispatcher (No DB, Vercel Ready)</p>
+          <p>College Outreach & Bulk Email Dispatcher</p>
         </div>
         <div style={{ display: 'flex', gap: '10px' }}>
           <button onClick={handleLoadSample} className="btn btn-primary">
             📁 Load Sample CSV
+          </button>
+          <button onClick={() => setShowPreview(!showPreview)} className="btn btn-outline" style={{ color: '#fff', borderColor: '#38bdf8' }}>
+            {showPreview ? '🙈 Hide Email Preview' : '👁️ View Email Preview'}
           </button>
           <button onClick={handleExportCSV} disabled={recipients.length === 0} className="btn btn-success">
             📥 Export Report CSV
@@ -565,50 +500,15 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid">
+      <div className="grid" style={{ gridTemplateColumns: showPreview ? '420px 1fr' : '420px 1fr' }}>
         {/* Left Column Controls */}
         <div>
-          {/* Card 1: Brevo Settings */}
+          {/* Card 1: Select Template & CSV Upload */}
           <div className="card">
-            <h2 className="card-title">🔑 1. Brevo API & Sender Setup</h2>
-            <div className="form-group">
-              <label>Brevo API Key (v3)</label>
-              <input
-                type="password"
-                placeholder="xkeysib-... (Or leave empty if BREVO_API_KEY set in Vercel)"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label>Sender Name</label>
-              <input
-                type="text"
-                value={senderName}
-                onChange={(e) => setSenderName(e.target.value)}
-              />
-            </div>
-            <div className="form-group">
-              <label>Sender Email (Must be verified in Brevo)</label>
-              <input
-                type="email"
-                placeholder="placements@sssamacademy.com"
-                value={senderEmail}
-                onChange={(e) => setSenderEmail(e.target.value)}
-              />
-            </div>
-            <button onClick={handleTestConnection} className="btn btn-primary btn-full">
-              Plug Test Brevo Connection
-            </button>
-            {statusMsg && <p style={{ fontSize: '12px', marginTop: '8px', color: '#94a3b8' }}>{statusMsg}</p>}
-          </div>
-
-          {/* Card 2: CSV Upload & Template Switcher */}
-          <div className="card">
-            <h2 className="card-title">🎨 2. Choose Template & Upload CSV</h2>
+            <h2 className="card-title">📂 1. Select Template & Upload CSV</h2>
             
             <div className="form-group">
-              <label>Select Email Template</label>
+              <label>Choose Email Template</label>
               <select
                 value={selectedTemplateId}
                 onChange={(e) => handleTemplateChange(e.target.value)}
@@ -638,9 +538,9 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Card 3: Dispatch & Live Execution Logs */}
+          {/* Card 2: Dispatch Controller & Execution Logs */}
           <div className="card">
-            <h2 className="card-title">🚀 3. Campaign Dispatcher</h2>
+            <h2 className="card-title">🚀 2. Campaign Dispatcher</h2>
             <div className="form-group">
               <label>Subject Line</label>
               <input
@@ -655,9 +555,9 @@ export default function Dashboard() {
                 onClick={() => handleStartDispatch()}
                 disabled={isSending || recipients.length === 0}
                 className="btn btn-success"
-                style={{ flex: 1, padding: '12px', fontSize: '14px' }}
+                style={{ flex: 1, padding: '14px', fontSize: '15px' }}
               >
-                {isSending ? 'Sending...' : `Send All (${recipients.length})`}
+                {isSending ? 'Sending Emails...' : `Send to ${recipients.length} Colleges`}
               </button>
 
               {failedCount > 0 && (
@@ -683,7 +583,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Right Column: Tracking Dashboard & HTML Preview */}
+        {/* Right Column: Tracking Dashboard & Optional HTML Preview */}
         <div>
           {/* Tracking Metrics & Table */}
           <div className="card">
@@ -740,7 +640,7 @@ export default function Dashboard() {
             </div>
 
             {/* Delivery Table */}
-            <div className="table-wrap" style={{ maxHeight: '250px' }}>
+            <div className="table-wrap" style={{ maxHeight: showPreview ? '220px' : '380px' }}>
               <table>
                 <thead>
                   <tr>
@@ -795,11 +695,18 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* HTML Preview */}
-          <div className="card">
-            <h2 className="card-title">👁️ Live Email Template Preview</h2>
-            <iframe ref={iframeRef} className="iframe-box" style={{ height: '480px' }} title="Email Render Preview" />
-          </div>
+          {/* Optional Email Preview (Hidden by Default) */}
+          {showPreview && (
+            <div className="card">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <h2 className="card-title" style={{ margin: 0 }}>👁️ Email Template Render Preview</h2>
+                <button onClick={() => setShowPreview(false)} className="btn btn-outline" style={{ padding: '2px 8px', fontSize: '11px' }}>
+                  ✖️ Hide Preview
+                </button>
+              </div>
+              <iframe ref={iframeRef} className="iframe-box" style={{ height: '420px' }} title="Email Render Preview" />
+            </div>
+          )}
         </div>
       </div>
     </div>
