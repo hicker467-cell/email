@@ -318,6 +318,7 @@ export default function Dashboard() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
 
+  const fileInputRef = useRef(null);
   const iframeRef = useRef(null);
 
   // Load Initial Config Defaults from Environment
@@ -339,7 +340,7 @@ export default function Dashboard() {
     return found ? found.title : 'IT & Tech Professionals';
   };
 
-  // Update Subject and HTML when Template or Role changes
+  // Update Subject when Role changes for Corporate Template
   useEffect(() => {
     if (selectedTemplateId === 'corporate_hiring') {
       const roleTitle = getActiveRoleTitle();
@@ -408,7 +409,21 @@ export default function Dashboard() {
     }
   };
 
-  // Load Sample CSV
+  // Download Pre-formatted CSV Sample Template
+  const handleDownloadSampleCSV = () => {
+    const csvContent = "Email,Name,Company_or_College\ntpo@college.ac.in,Dr. R. K. Sharma,Delhi Technological University\nhr@company.com,Wipro Hiring Team,Wipro Technologies\nplacements@university.edu,,Gurugram University\n";
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'SSSAM_Recipient_Sample_Template.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    addLog('Downloaded sample CSV template file.', 'green');
+  };
+
+  // Load Built-in Sample Emails
   const handleLoadSample = () => {
     const sampleData = [
       { email: 'tpo@dtu.ac.in', name: 'Dr. Sharma (Delhi Technological University)' },
@@ -430,9 +445,8 @@ export default function Dashboard() {
     addLog('Loaded 4 sample emails (with and without custom names).', 'green');
   };
 
-  // Handle CSV File Upload
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
+  // Robust Case-Insensitive CSV File Parser
+  const processCSVFile = (file) => {
     if (!file) return;
 
     Papa.parse(file, {
@@ -440,14 +454,31 @@ export default function Dashboard() {
       skipEmptyLines: true,
       complete: (results) => {
         const parsed = [];
+        if (!results.data || results.data.length === 0) {
+          alert('CSV file appears to be empty.');
+          return;
+        }
+
         results.data.forEach((row, index) => {
-          const emailVal = row.email || row.Email || row.EMAIL || Object.values(row).find((v) => v && v.includes('@'));
-          const nameVal = row.College_Name || row.Name || row.Contact_Person || row.TPO_Name || row.Company || '';
-          if (emailVal) {
+          const keys = Object.keys(row);
+          // Find email column key case-insensitively
+          const emailKey = keys.find(k => k && k.trim().toLowerCase().includes('email'));
+          const nameKey = keys.find(k => k && (
+            k.trim().toLowerCase().includes('name') ||
+            k.trim().toLowerCase().includes('college') ||
+            k.trim().toLowerCase().includes('company') ||
+            k.trim().toLowerCase().includes('contact') ||
+            k.trim().toLowerCase().includes('tpo')
+          ));
+
+          const emailVal = emailKey ? row[emailKey] : Object.values(row).find(v => typeof v === 'string' && v.includes('@'));
+          const nameVal = nameKey ? row[nameKey] : '';
+
+          if (emailVal && typeof emailVal === 'string' && emailVal.includes('@')) {
             parsed.push({
-              id: index,
+              id: Date.now() + Math.random() + index,
               email: emailVal.trim(),
-              name: nameVal ? nameVal.trim() : '',
+              name: nameVal ? String(nameVal).trim() : '',
               status: 'Pending ⏳',
               reason: '-',
               time: '-',
@@ -458,12 +489,36 @@ export default function Dashboard() {
 
         if (parsed.length > 0) {
           setRecipients((prev) => [...parsed, ...prev]);
-          addLog(`Loaded ${parsed.length} emails from ${file.name}`, 'green');
+          addLog(`Loaded ${parsed.length} recipients from CSV!`, 'green');
         } else {
-          alert('No valid emails found in CSV. Please ensure your CSV has an "Email" column.');
+          alert('No valid emails found in CSV. Please ensure your CSV has an "Email" column header.');
         }
+      },
+      error: (err) => {
+        alert(`CSV Parsing Error: ${err.message}`);
+        addLog(`CSV Error: ${err.message}`, 'red');
       }
     });
+  };
+
+  // File Input Handler
+  const handleFileInputChange = (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      processCSVFile(file);
+    }
+  };
+
+  // Drag & Drop Handlers
+  const handleDrop = (e) => {
+    e.preventDefault();
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      processCSVFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
   };
 
   // Add Log Entry
@@ -700,7 +755,7 @@ export default function Dashboard() {
             {isSending ? 'Sending Emails...' : `🚀 Send All (${recipients.length})`}
           </button>
           <button onClick={handleLoadSample} className="btn btn-primary">
-            📁 Sample CSV
+            📁 Sample Data
           </button>
           <button onClick={() => setShowPreview(!showPreview)} className="btn btn-outline">
             {showPreview ? '🙈 Hide Preview' : '👁️ View Preview'}
@@ -854,12 +909,44 @@ export default function Dashboard() {
               </form>
             )}
 
-            {/* Mode B: CSV Dropzone */}
+            {/* Mode B: Robust Interactive CSV Upload & Template Download */}
             {inputMode === 'csv' && (
-              <div className="dropzone">
-                <p style={{ fontSize: '14px', fontWeight: '600' }}>Drop CSV File Here</p>
-                <p style={{ fontSize: '12px', color: '#94a3b8', margin: '4px 0 10px' }}>Requires an "Email" column (Name/Company optional)</p>
-                <input type="file" accept=".csv" onChange={handleFileUpload} />
+              <div 
+                className="dropzone"
+                onDrop={handleDrop}
+                onDragOver={handleDragOver}
+                onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                style={{ position: 'relative', cursor: 'pointer' }}
+              >
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".csv"
+                  onChange={handleFileInputChange}
+                  style={{ display: 'none' }}
+                />
+                
+                <p style={{ fontSize: '15px', fontWeight: '700', color: '#60a5fa' }}>📁 Click or Drag CSV File Here</p>
+                <p style={{ fontSize: '12px', color: '#94a3b8', margin: '4px 0 12px' }}>Supports CSV files with an "Email" column</p>
+
+                <div style={{ display: 'flex', gap: '8px', justifyContent: 'center', flexWrap: 'wrap' }} onClick={(e) => e.stopPropagation()}>
+                  <button
+                    type="button"
+                    onClick={() => fileInputRef.current && fileInputRef.current.click()}
+                    className="btn btn-primary"
+                    style={{ fontSize: '12px', padding: '6px 12px' }}
+                  >
+                    📂 Browse CSV File
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleDownloadSampleCSV}
+                    className="btn btn-outline"
+                    style={{ fontSize: '12px', padding: '6px 12px', color: '#34d399', borderColor: '#34d399' }}
+                  >
+                    📥 Download Sample CSV Template
+                  </button>
+                </div>
               </div>
             )}
           </div>
